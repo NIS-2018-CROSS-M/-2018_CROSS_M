@@ -1,5 +1,5 @@
 # -2018_CROSS_M
-
+main info about the project here
 
 
 **Участники и тьюторы проекта**
