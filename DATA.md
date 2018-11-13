@@ -2,14 +2,19 @@
 
 # Data preparation
 
-* Download the following Wikipedias (http://dumps.wikimedia.org):
-  * Russian
+* Download the following Wikipedias (https://dumps.wikimedia.org/backup-index.html):
+  * Russian (e.g. [ruwiki-20181101-pages-articles.xml.bz2](https://dumps.wikimedia.org/ruwiki/20181101/ruwiki-20181101-pages-articles.xml.bz2) from [here](https://dumps.wikimedia.org/ruwiki/20181101/)
   * Czech
   * Polish
   * Ukrainian
   * Belarusian
   * Serbian
   * Croatian
+  * Silesian
+
+* Don't forget to save the name of the dump (for reproducibility)
+
+* Extract the text using [WikiExtractor](https://github.com/apertium/WikiExtractor)
 
 * Make a frequency list from each Wikipedia
 
@@ -20,6 +25,7 @@
   * [`apertium-ukr`](https://github.com/apertium/apertium-ukr)
   * [`apertium-bel`](https://github.com/apertium/apertium-bel)
   * [`apertium-hbs`](https://github.com/apertium/apertium-hbs)
+  * [`apertium-szl`](https://github.com/apertium/apertium-szl)
 
 * Analyse each frequency list with the analyser and select the top 10,000 open-category forms (`<n>`, `<vblex>`, `<adj>`)
 
