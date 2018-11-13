@@ -1,13 +1,13 @@
 # НИС-2018_CROSS_M
 
 **Meeting Notes**
-First deadline: 17 December. The work is based on *Initial Experiments in Data-Driven Morphological Analysis for Finnish (Silvferberg, Hulden)*. See **Этапы** section for more information on it.
+First deadline: 15 November prepare a formal presentation of the project. The work is based on *Initial Experiments in Data-Driven Morphological Analysis for Finnish (Silvferberg, Hulden)*. See **Этапы** section for more information on it.
 
-Our preliminary goal: implement the idea of the paper inside a language family: the program will be able to analyse an unknown language based on data from other languages of the same family. Ideal F-Score target = 80% (this due mainly to the fact that we cannot implement morphological features absent in the already-known languages).
+**Our preliminary goal:** implement the paper findings inside a language family: the program will be able to analyse an unknown language based on data from other languages of the same family. Ideal F-Score target = 80% (this due mainly to the fact that we cannot implement morphological features absent in the already-known languages).
 
-Language family: the idea is to work with Slavic languages
+**Language family:** the idea is to work with Slavic languages
 
-Process: the idea is to rework every step of the project to make it more informative and useful on a learning perspective. Francis will oversee all the steps and give advice on how to proceed, Oleg will be the "programming-guru" and help with the various programming steps given the limited experience of the rest of the team. Anastasia, Vlad and Lorenzo will each take control of one of the sub-tasks and lead the development of it.
+**Process:** main concept is to rework every step of the project to make it more informative and useful on a learning perspective. Francis will oversee all the steps and give advice on how to proceed, Oleg will be the "programming-guru" and help with the various programming steps given the limited experience of the rest of the team. Anastasia, Vlad and Lorenzo will each take control of one of the sub-tasks and lead the development of it.
 
 Our introductory research will focus on:
 1) reimplementing the code
