@@ -10,6 +10,7 @@
   * Belarusian
   * Bulgarian 
   * Macedonian 
+  * Slovenian
   * Serbian
   * Croatian
   * Silesian
@@ -24,6 +25,7 @@
   * [`apertium-rus`](https://github.com/apertium/apertium-rus)
   * [`apertium-ces`](https://github.com/apertium/apertium-ces)
   * [`apertium-bul`](https://github.com/apertium/apertium-bul)
+  * [`apertium-slv`](https://github.com/apertium/apertium-slv)
   * [`apertium-mkd`](https://github.com/apertium/apertium-mkd)
   * [`apertium-pol`](https://github.com/apertium/apertium-pol)
   * [`apertium-ukr`](https://github.com/apertium/apertium-ukr)
