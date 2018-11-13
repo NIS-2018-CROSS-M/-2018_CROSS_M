@@ -8,6 +8,8 @@
   * Polish
   * Ukrainian
   * Belarusian
+  * Bulgarian 
+  * Macedonian 
   * Serbian
   * Croatian
   * Silesian
@@ -21,6 +23,8 @@
 * Download and compile the following Apertium modules:
   * [`apertium-rus`](https://github.com/apertium/apertium-rus)
   * [`apertium-ces`](https://github.com/apertium/apertium-ces)
+  * [`apertium-bul`](https://github.com/apertium/apertium-bul)
+  * [`apertium-mkd`](https://github.com/apertium/apertium-mkd)
   * [`apertium-pol`](https://github.com/apertium/apertium-pol)
   * [`apertium-ukr`](https://github.com/apertium/apertium-ukr)
   * [`apertium-bel`](https://github.com/apertium/apertium-bel)
