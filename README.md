@@ -3,7 +3,7 @@
 **Meeting Notes**
 First deadline: 15 November prepare a formal presentation of the project. The work is based on *Initial Experiments in Data-Driven Morphological Analysis for Finnish (Silvferberg, Hulden)*. See **Этапы** section for more information on it.
 
-**Our preliminary goal:** implement the paper findings inside a language family: modelling morphology of an unseen language with annotated data on related languages given. Ideal F-Score target = 80% (this due mainly to the fact that we cannot implement morphological features absent in the already-known languages).
+**Our preliminary goal:** modelling morphology of an unseen language with annotated data on related languages given. Ideal F-Score target = 80% (this due mainly to the fact that we cannot implement morphological features absent in the already-known languages).
 
 **Language family:** the idea is to work with Slavic languages
 
