@@ -102,3 +102,32 @@ You should probably discard:
 You can think about if you want to discard indeclinable readings (e.g. noun readings for "но")
 
 
+# Regular expressions
+
+Freq.list:
+
+$ uconv -x lower < DUMPNAME | sed 's/[^REGEX]\+/\n/g' | sort -r | uniq -c | sort -nr > FILENAME
+
+REGEX:
+* Russian
+    * [а-яА-Я]
+* Czech
+    * ???
+* Polish
+    * [a-pr-uwy-zA-PR-UWY-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]
+* Ukrainian
+    * ???
+* Belarusian
+    * [ёа-зй-шы-яЁА-ЗЙ-ШЫІіЎў] - apostrophe
+* Bulgarian 
+    * ???
+* Macedonian 
+    * ???
+* Slovenian
+    * ???
+* Serbian
+    * ???
+* Croatian
+    * ???
+* Silesian
+    * ???
