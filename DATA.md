@@ -111,7 +111,7 @@ $ uconv -x lower < DUMPNAME | sed 's/[^REGEX]\+/\n/g' | sort -r | uniq -c | sort
 REGEX:
 * Russian
 ```
-[а-яА-Я]
+[а-яёА-ЯЁ]
 ```
 * Czech
     * ???
