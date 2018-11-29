@@ -1,9 +1,5 @@
 # НИС-2018_CROSS_M
 
-**Meeting Notes**
-
-First deadline: 15 November prepare a formal presentation of the project. The work is based on *Initial Experiments in Data-Driven Morphological Analysis for Finnish (Silvferberg, Hulden)*. See **Этапы** section for more information on it.
-
 **Our preliminary goal:** modelling morphology of an unseen language with annotated data on related languages given. Ideal F-Score target = 80% (this due mainly to the fact that we cannot implement morphological features absent in the already-known languages).
 
 **Language family:** the idea is to work with Slavic languages
@@ -32,9 +28,7 @@ Tasks:
 участники: Влад Михaйлов, Лоренцо Този, Олег Сериков, Анастасия Хорошева.
 тьюторы: Францис Таерз, Анастасия Бонч-Осмоловская
 
-**нынешний тимлид проекта:** Лоренцо Този (12-25 ноября 2018)
-
-**порядок смены тимлидов:**
+**Teamleaders:**
 
 12-25 ноября: Лоренцо
 
