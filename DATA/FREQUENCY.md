@@ -50,7 +50,20 @@ $ head uk_freq.hist
 ```
 * Belarusian
 ```
-[ёа-зй-шы-яЁА-ЗЙ-ШЫІіЎў] - apostrophe needed*
+$ uconv -x lower < bewiki-20181120-pages-articles-multistream.txt | sed "s/[^ёа-зй-шы-яЁА-ЗЙ-ШЫІіЎў']\+/\n/g" | sort -r | uniq -c | sort -nr > be_freq.hist
+
+$ head be_freq.hist
+
+1152981 
+ 677607 і
+ 641942 у
+ 572173 ў
+ 410294 з
+ 368861 на
+ 161720 да
+ 126731 года
+ 112259 па
+ 102815 годзе
 ```
 * Bulgarian 
 * ???
