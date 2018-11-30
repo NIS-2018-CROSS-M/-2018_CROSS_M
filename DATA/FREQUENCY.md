@@ -27,7 +27,8 @@ $ head ru_freq.hist
 ```
 
 **Czech**
-* ???
+
+
 **Polish**
 ```
 uconv -x lower < plwiki-20181101-pages-articles-multistream.txt | sed 's/[^a-pr-uwy-ząćęłńóśźż]\+/\n/g' | sort -r | uniq -c | sort -nr > pl_freq.hist
