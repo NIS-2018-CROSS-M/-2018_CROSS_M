@@ -79,6 +79,7 @@ $ head uk_freq.hist
 1228118 року
 1088126 за
 ```
+
 **Belarusian**
 ```
 $ uconv -x lower < bewiki-20181120-pages-articles-multistream.txt | sed "s/[^ёа-зй-шы-яіў']\+/\n/g" | sort -r | uniq -c | sort -nr > be_freq.hist
@@ -96,6 +97,7 @@ $ head be_freq.hist
  112259 па
  102815 годзе
 ```
+
 **Bulgarian** 
 ```
 $ uconv -x lower < bgwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ъьюя]\+/\n/g' | sort -r | uniq -c | sort -nr > bg_freq.hist
@@ -113,8 +115,24 @@ $ head bg_freq.hist
  588790 с
  545806 г
 ```
+
 **Macedonian**
-* ???
+```
+$ uconv -x lower < mkwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ик-шѓѕјљњќџ]\+/\n/g' | sort -r | uniq -c | sort -nr > mk_freq.hist
+
+$ head mk_freq.hist
+1819398 на
+1147923 во
+1025096 
+ 929090 и
+ 701826 од
+ 643944 се
+ 472556 е
+ 394170 со
+ 388703 за
+ 288450 да
+```
+
 **Slovenian**
 * ???
 **Serbian**
