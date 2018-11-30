@@ -27,7 +27,22 @@ $ head ru_freq.hist
 ```
 
 **Czech**
+```
+$ uconv -x lower < cswiki-20181120-pages-articles-multistream.txt | sed 's/[^a-záčďéěíňóřšťúůýž]\+/\n/g' | sort -r | uniq -c | sort -nr > cs_freq.hist
 
+$ head cs_freq.hist
+
+3870103 
+3326181 v
+3233979 a
+1919556 se
+1744502 na
+1296633 je
+ 818770 z
+ 781687 s
+ 750808 do
+ 611968 byl
+```
 
 **Polish**
 ```
@@ -46,6 +61,7 @@ head pl_freq.hist
 1171855 a
 1042590 od
 ```
+
 **Ukrainian**
 ```
 $ uconv -x lower < ukwiki-20181120-pages-articles-multistream.txt | sed "s/[^а-щьюяїієґ']\+/\n/g" | sort -r | uniq -c | sort -nr > uk_freq.hist
