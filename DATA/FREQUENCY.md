@@ -121,6 +121,7 @@ $ head bg_freq.hist
 $ uconv -x lower < mkwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ик-шѓѕјљњќџ]\+/\n/g' | sort -r | uniq -c | sort -nr > mk_freq.hist
 
 $ head mk_freq.hist
+
 1819398 на
 1147923 во
 1025096 
@@ -134,7 +135,23 @@ $ head mk_freq.hist
 ```
 
 **Slovenian**
-* ???
+```
+$ uconv -x lower < slwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-vzčšž]\+/\n/g' | sort -r | uniq -c | sort -nr > sl_freq.hist
+
+$ head sl_freq.hist
+
+1481864 je
+1409861 
+ 984448 v
+ 915362 in
+ 500453 na
+ 398994 so
+ 386201 se
+ 334624 ki
+ 306842 za
+ 227888 leta
+```
+
 **Serbian**
 * ???
 **Croatian**
