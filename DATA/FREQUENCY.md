@@ -6,10 +6,11 @@
 $ uconv -x lower < DUMPNAME | sed 's/[^REGEX]\+/\n/g' | sort -r | uniq -c | sort -nr > FILENAME
 ```
 
-
+Since we lower the words in the texts before tokenising, sorting and counting, we do not consider uppercase letters in our regular expressions. 
+ 
 **Russian**
 ```
-$ uconv -x lower < ruwiki-20181101-pages-articles.txt | sed 's/[^а-яёА-ЯЁ]\+/\n/g' | sort -r | uniq -c | sort -nr > ru_freq.hist
+$ uconv -x lower < ruwiki-20181101-pages-articles.txt | sed 's/[^а-яё]\+/\n/g' | sort -r | uniq -c | sort -nr > ru_freq.hist
 
 $ head ru_freq.hist
 
@@ -25,15 +26,28 @@ $ head ru_freq.hist
 1824770 к
 ```
 
-* Czech
+**Czech**
 * ???
-* Polish
+**Polish**
 ```
-[a-pr-uwy-zA-PR-UWY-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]
+uconv -x lower < plwiki-20181101-pages-articles-multistream.txt | sed 's/[^a-pr-uwy-ząćęłńóśźż]\+/\n/g' | sort -r | uniq -c | sort -nr > pl_freq.hist
+
+head pl_freq.hist
+
+11739624 w
+9332135 
+4672516 i
+3585799 na
+3496033 z
+2596201 do
+2352529 się
+1658183 roku
+1171855 a
+1042590 od
 ```
 **Ukrainian**
 ```
-$ uconv -x lower < ukwiki-20181120-pages-articles-multistream.txt | sed "s/[^а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']\+/\n/g" | sort -r | uniq -c | sort -nr > uk_freq.hist
+$ uconv -x lower < ukwiki-20181120-pages-articles-multistream.txt | sed "s/[^а-щьюяїієґ']\+/\n/g" | sort -r | uniq -c | sort -nr > uk_freq.hist
 
 $ head uk_freq.hist
 
@@ -48,9 +62,9 @@ $ head uk_freq.hist
 1228118 року
 1088126 за
 ```
-* Belarusian
+**Belarusian**
 ```
-$ uconv -x lower < bewiki-20181120-pages-articles-multistream.txt | sed "s/[^ёа-зй-шы-яЁА-ЗЙ-ШЫІіЎў']\+/\n/g" | sort -r | uniq -c | sort -nr > be_freq.hist
+$ uconv -x lower < bewiki-20181120-pages-articles-multistream.txt | sed "s/[^ёа-зй-шы-яіў']\+/\n/g" | sort -r | uniq -c | sort -nr > be_freq.hist
 
 $ head be_freq.hist
 
@@ -65,15 +79,30 @@ $ head be_freq.hist
  112259 па
  102815 годзе
 ```
-* Bulgarian 
+**Bulgarian** 
+```
+$ uconv -x lower < bgwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ъьюя]\+/\n/g' | sort -r | uniq -c | sort -nr > bg_freq.hist
+
+$ head bg_freq.hist
+
+3219458 на
+2158731 
+1867058 и
+1733141 в
+1449104 е
+1241037 от
+ 816977 се
+ 730813 за
+ 588790 с
+ 545806 г
+```
+**Macedonian**
 * ???
-* Macedonian 
+**Slovenian**
 * ???
-* Slovenian
+**Serbian**
 * ???
-* Serbian
+**Croatian**
 * ???
-* Croatian
-* ???
-* Silesian
+**Silesian**
 * ???
