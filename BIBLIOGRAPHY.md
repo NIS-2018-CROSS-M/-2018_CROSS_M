@@ -12,7 +12,9 @@
    * http://www.aclweb.org/anthology/E17-2034
 * A Neural Morphological Analyzer for Arapaho Verbs Learned from a Finite State Transducer
    * http://aclweb.org/anthology/W18-4802
-
+* A Resource-light Approach to Russian Morphology: Tagging Russian using Czech resources
+   * http://ufal.mff.cuni.cz/~hana/bib/HanaFeldmanBrew2004-RusMorphLite.pdf
+   
 ## Cognate identification
 
 * Siamese Convolutional Networks for Cognate Identification
