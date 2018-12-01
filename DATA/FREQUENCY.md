@@ -153,8 +153,37 @@ $ head sl_freq.hist
 ```
 
 **Serbian**
-* ???
+```
+$ uconv -x lower < srwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ик-шђјљњћџ]\+/\n/g' | sort -r | uniq -c | sort -nr > sr_freq.hist
+
+$ head sr_freq.hist
+
+4214156 
+3086982 у
+3083916 је
+1854467 и
+1142731 се
+1133315 на
+ 836809 од
+ 720637 године
+ 658023 су
+ 608754 из
+```
 **Croatian**
-* ???
+```
+$ uconv -x lower < hrwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-vzžčćđš]\+/\n/g' | sort -r | uniq -c | sort -nr > hr_freq.hist
+
+$ head hr_freq.hist
+1787829 
+1621809 je
+1499808 i
+1487943 u
+ 628194 se
+ 607184 na
+ 486203 su
+ 373546 od
+ 353323 za
+ 299524 a
+```
 **Silesian**
 * ???
