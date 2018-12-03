@@ -169,6 +169,7 @@ $ head sr_freq.hist
  658023 су
  608754 из
 ```
+
 **Croatian**
 ```
 $ uconv -x lower < hrwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-vzžčćđš]\+/\n/g' | sort -r | uniq -c | sort -nr > hr_freq.hist
@@ -185,5 +186,22 @@ $ head hr_freq.hist
  353323 za
  299524 a
 ```
+
 **Silesian**
-* ???
+```
+$ uconv -x lower < szlwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-uwyzãčćłńŏōõôřśšůžźż]\+/\n/g' | sort -r | uniq -c | sort -nr > szl_freq.hist
+
+$ head szl_freq.hist 
+
+  29118 
+  21703 we
+   9241 a
+   4876 je
+   4689 na
+   3546 ze
+   3017 do
+   2823 mjasto
+   2349 śe
+   2016 uod
+```
+
