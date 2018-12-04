@@ -10,9 +10,9 @@ Since we lower the words in the texts before tokenising, sorting and counting, w
  
 **Russian**
 ```
-$ uconv -x lower < ruwiki-20181101-pages-articles.txt | sed 's/[^а-яё]\+/\n/g' | sort -r | uniq -c | sort -nr > ru_freq.hist
+$ uconv -x lower < ruwiki-20181101-pages-articles.txt | sed 's/[^а-яё]\+/\n/g' | sort -r | uniq -c | sort -nr > ru_freq.txt
 
-$ head ru_freq.hist
+$ head ru_freq.txt
 
 21097036 в
 17515267 
@@ -28,9 +28,9 @@ $ head ru_freq.hist
 
 **Czech**
 ```
-$ uconv -x lower < cswiki-20181120-pages-articles-multistream.txt | sed 's/[^a-záčďéěíňóřšťúůýž]\+/\n/g' | sort -r | uniq -c | sort -nr > cs_freq.hist
+$ uconv -x lower < cswiki-20181120-pages-articles-multistream.txt | sed 's/[^a-záčďéěíňóřšťúůýž]\+/\n/g' | sort -r | uniq -c | sort -nr > cs_freq.txt
 
-$ head cs_freq.hist
+$ head cs_freq.txt
 
 3870103 
 3326181 v
@@ -46,9 +46,9 @@ $ head cs_freq.hist
 
 **Polish**
 ```
-$ uconv -x lower < plwiki-20181101-pages-articles-multistream.txt | sed 's/[^a-pr-uwy-ząćęłńóśźż]\+/\n/g' | sort -r | uniq -c | sort -nr > pl_freq.hist
+$ uconv -x lower < plwiki-20181101-pages-articles-multistream.txt | sed 's/[^a-pr-uwy-ząćęłńóśźż]\+/\n/g' | sort -r | uniq -c | sort -nr > pl_freq.txt
 
-$ head pl_freq.hist
+$ head pl_freq.txt
 
 11739624 w
 9332135 
@@ -64,9 +64,9 @@ $ head pl_freq.hist
 
 **Ukrainian**
 ```
-$ uconv -x lower < ukwiki-20181120-pages-articles-multistream.txt | sed "s/[^а-щьюяїієґ']\+/\n/g" | sort -r | uniq -c | sort -nr > uk_freq.hist
+$ uconv -x lower < ukwiki-20181120-pages-articles-multistream.txt | sed "s/[^а-щьюяїієґ']\+/\n/g" | sort -r | uniq -c | sort -nr > uk_freq.txt
 
-$ head uk_freq.hist
+$ head uk_freq.txt
 
 8627722 
 3775930 в
@@ -82,9 +82,9 @@ $ head uk_freq.hist
 
 **Belarusian**
 ```
-$ uconv -x lower < bewiki-20181120-pages-articles-multistream.txt | sed "s/[^ёа-зй-шы-яіў']\+/\n/g" | sort -r | uniq -c | sort -nr > be_freq.hist
+$ uconv -x lower < bewiki-20181120-pages-articles-multistream.txt | sed "s/[^ёа-зй-шы-яіў']\+/\n/g" | sort -r | uniq -c | sort -nr > be_freq.txt
 
-$ head be_freq.hist
+$ head be_freq.txt
 
 1152981 
  677607 і
@@ -100,9 +100,9 @@ $ head be_freq.hist
 
 **Bulgarian** 
 ```
-$ uconv -x lower < bgwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ъьюя]\+/\n/g' | sort -r | uniq -c | sort -nr > bg_freq.hist
+$ uconv -x lower < bgwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ъьюя]\+/\n/g' | sort -r | uniq -c | sort -nr > bg_freq.txt
 
-$ head bg_freq.hist
+$ head bg_freq.txt
 
 3219458 на
 2158731 
@@ -118,9 +118,9 @@ $ head bg_freq.hist
 
 **Macedonian**
 ```
-$ uconv -x lower < mkwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ик-шѓѕјљњќџ]\+/\n/g' | sort -r | uniq -c | sort -nr > mk_freq.hist
+$ uconv -x lower < mkwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ик-шѓѕјљњќџ]\+/\n/g' | sort -r | uniq -c | sort -nr > mk_freq.txt
 
-$ head mk_freq.hist
+$ head mk_freq.txt
 
 1819398 на
 1147923 во
@@ -136,9 +136,9 @@ $ head mk_freq.hist
 
 **Slovenian**
 ```
-$ uconv -x lower < slwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-vzčšž]\+/\n/g' | sort -r | uniq -c | sort -nr > sl_freq.hist
+$ uconv -x lower < slwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-vzčšž]\+/\n/g' | sort -r | uniq -c | sort -nr > sl_freq.txt
 
-$ head sl_freq.hist
+$ head sl_freq.txt
 
 1481864 je
 1409861 
@@ -154,9 +154,9 @@ $ head sl_freq.hist
 
 **Serbian**
 ```
-$ uconv -x lower < srwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ик-шђјљњћџ]\+/\n/g' | sort -r | uniq -c | sort -nr > sr_freq.hist
+$ uconv -x lower < srwiki-20181120-pages-articles-multistream.txt | sed 's/[^а-ик-шђјљњћџ]\+/\n/g' | sort -r | uniq -c | sort -nr > sr_freq.txt
 
-$ head sr_freq.hist
+$ head sr_freq.txt
 
 4214156 
 3086982 у
@@ -172,9 +172,9 @@ $ head sr_freq.hist
 
 **Croatian**
 ```
-$ uconv -x lower < hrwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-vzžčćđš]\+/\n/g' | sort -r | uniq -c | sort -nr > hr_freq.hist
+$ uconv -x lower < hrwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-vzžčćđš]\+/\n/g' | sort -r | uniq -c | sort -nr > hr_freq.txt
 
-$ head hr_freq.hist
+$ head hr_freq.txt
 
 1787829 
 1621809 je
@@ -190,9 +190,9 @@ $ head hr_freq.hist
 
 **Silesian**
 ```
-$ uconv -x lower < szlwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-uwyzãčćłńŏōõôřśšůžźż]\+/\n/g' | sort -r | uniq -c | sort -nr > szl_freq.hist
+$ uconv -x lower < szlwiki-20181120-pages-articles-multistream.txt | sed 's/[^a-pr-uwyzãčćłńŏōõôřśšůžźż]\+/\n/g' | sort -r | uniq -c | sort -nr > szl_freq.txt
 
-$ head szl_freq.hist 
+$ head szl_freq.txt
 
 29118 
 21703 we
@@ -205,4 +205,3 @@ $ head szl_freq.hist
  2349 śe
  2016 uod
 ```
-
