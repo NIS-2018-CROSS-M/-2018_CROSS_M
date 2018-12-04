@@ -1,27 +1,9 @@
-# Frequency lists analysis
-
-### Apertium modules
-
-**Module downloading**
-
-```
-$ git clone MODULENAMEURL
-```
-
-**Module compiling**
-
-```
-# in the module directory
-$ sudo ./autogen.sh
-$ sudo make
-```
-
-### Morphological analysis
+# Morphological analysis
 
 **Pipeline**
 
 ```
-$ apertium -d . rus-morph < FILENAME1 | cut -f2 -d' ' | paste <(cut -f1 -d' ' FILENAME1) - | sed 's/\t/ /g' > FILENAME2
+$ apertium -d . MODULENAME-morph < FILENAME1 | cut -f2 -d' ' | paste <(cut -f1 -d' ' FILENAME1) - | sed 's/\t/ /g' > FILENAME2
 ```
 
 **Russian**
