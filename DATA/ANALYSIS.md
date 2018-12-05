@@ -31,7 +31,25 @@ $ head -15 rumorph.txt
 
 **Czech**
 ```
+$ apertium -d . ces-morph < cs_freq.txt | cut -f2 -d' ' | paste <(cut -f1 -d' ' cs_freq.txt) - | sed 's/\t/ /g' > cesmorph.txt
 
+$ head -15 cesmorph.txt
+
+3326181 ^v/v<pr>$
+3233979 ^a/a<cnjcoo>$
+1919556 ^se/se<prn><ref><acc>$
+1744502 ^na/na<pr>$
+1296633 ^je/být<vbser><pres><p3><sg>/prpers<prn><p3><mf><pl><acc>$
+818770 ^z/z<pr>$
+781687 ^s/s<pr>$
+750808 ^do/do<pr>$
+611968 ^byl/být<vbser><past><m><sg>$
+606219 ^ve/v<pr>$
+566709 ^roce/rok<n><mi><sg><loc>$
+502371 ^i/i<cnjcoo>$
+483610 ^roku/rok<n><mi><sg><loc>/rok<n><mi><sg><voc>/rok<n><mi><sg><dat>/rok<n><mi><sg><gen>$
+476164 ^jako/jako<pr>$
+459957 ^o/o<pr>$
 ```
 
 **Polish**
