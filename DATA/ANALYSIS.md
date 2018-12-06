@@ -8,9 +8,9 @@ $ apertium -d . MODULENAME-morph < FILENAME1 | cut -f2 -d' ' | paste <(cut -f1 -
 
 **Russian**
 ```
-$ apertium -d . rus-morph < ru_freq.txt | cut -f2 -d' ' | paste <(cut -f1 -d' ' ru_freq.txt) - | sed 's/\t/ /g' > rumorph.txt
+$ apertium -d . rus-morph < ru_freq.txt | cut -f2 -d' ' | paste <(cut -f1 -d' ' ru_freq.txt) - | sed 's/\t/ /g' > rusmorph.txt
 
-$ head -15 rumorph.txt
+$ head -15 rusmorph.txt
  
 21097036 ^в/в<pr>$
 11915014 ^и/и<cnjcoo>/и<adv>/и²<n><nt><nn><sg><nom>/и²<n><nt><nn><sg><gen>/и²<n><nt><nn><sg><dat>/и²<n><nt><nn><sg><acc>/и²<n><nt><nn><sg><prp>/и²<n><nt><nn><sg><ins>/и²<n><nt><nn><pl><nom>/и²<n><nt><nn><pl><gen>/и²<n><nt><nn><pl><dat>/и²<n><nt><nn><pl><acc>/и²<n><nt><nn><pl><prp>/и²<n><nt><nn><pl><ins>$
