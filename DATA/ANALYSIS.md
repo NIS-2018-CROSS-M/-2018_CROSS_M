@@ -3,8 +3,7 @@
 **Pipeline**
 
 ```
-$ cut -f2 -d' ' FILENAME1 | apertium -d . MODULENAME-morph | grep -v -P "^\s*$" | sed 's/ /\n/g' | paste <(cut -f1 -d' ' FILENAME1) - | sed 's/\t/ /g' > FILENAME2
-
+$ cut -f2 -d' ' FILENAME1 | apertium -d . MODULENAME-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' FILENAME1) - | sed 's/\t/ /g' > FILENAME2
 ```
 
 **Russian**
@@ -101,7 +100,7 @@ $ head ukrmorph.txt
 
 **Belarusian**
 ```
-cut -f2 -d' ' be_freq.txt | apertium -d . bel-morph | grep -v -P "^\s*$" | sed 's/ /\n/g' | paste <(cut -f1 -d' ' be_freq.txt) - | sed 's/\t/ /g' > belmorph.txt
+cut -f2 -d' ' be_freq.txt | apertium -d . bel-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' be_freq.txt) - | sed 's/\t/ /g' > belmorph.txt
 
 $ head -15 belmorph.txt
 
@@ -240,5 +239,4 @@ $ head -15 szlmorph.txt
 1780 ^s/s<n><f><sp><indecl>$
 1759 ^sam/sam<adv>$
 1532 ^ludźi/*ludźi$
-
 ```
