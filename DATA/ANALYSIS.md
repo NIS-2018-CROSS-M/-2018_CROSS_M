@@ -9,7 +9,7 @@ $ cut -f2 -d' ' FILENAME1 | apertium -d . MODULENAME-morph | grep -v -P "^\s*$" 
 
 **Russian**
 ```
-$ apertium -d . rus-morph < ru_freq.txt | cut -f2 -d' ' | paste <(cut -f1 -d' ' ru_freq.txt) - | sed 's/\t/ /g' > rusmorph.txt
+$ cut -f2 -d' ' ru_freq.txt | apertium -d . rus-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' ru_freq.txt) - | sed 's/\t/ /g' > rusmorph.txt
 
 $ head -15 rusmorph.txt
  
@@ -32,7 +32,7 @@ $ head -15 rusmorph.txt
 
 **Czech**
 ```
-$ cut -d' ' -f2 cs_freq.txt | apertium -d . ces-morph | paste <(cut -f1 -d' ' cs_freq.txt) - | sed 's/\t/ /g' > cesmorph.txt
+$ cut -f2 -d' ' cs_freq.txt | apertium -d . ces-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' cs_freq.txt) - | sed 's/\t/ /g' > cesmorph.txt
 
 $ head -15 cesmorph.txt
 
@@ -55,7 +55,7 @@ $ head -15 cesmorph.txt
 
 **Polish**
 ```
-$ apertium -d . pol-morph < pl_freq.txt | cut -f2 -d' ' | paste <(cut -f1 -d' ' pl_freq.txt) - | sed 's/\t/ /g' > polmorph.txt
+$ cut -f2 -d' ' pl_freq.txt | apertium -d . pol-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' pl_freq.txt) - | sed 's/\t/ /g' > polmorph.txt
 
 $ head -15 polmorph.txt
 
@@ -78,7 +78,7 @@ $ head -15 polmorph.txt
 
 **Ukrainian**
 ```
-$ apertium -d . ukr-morph < uk_freq.txt | cut -f2 -d' ' | paste <(cut -f1 -d' ' uk_freq.txt) - | sed 's/\t/ /g' > ukrmorph.txt
+$ cut -f2 -d' ' uk_freq.txt | apertium -d . ukr-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' uk_freq.txt) - | sed 's/\t/ /g' > ukrmorph.txt
 
 $ head ukrmorph.txt
 
@@ -124,7 +124,7 @@ $ head -15 belmorph.txt
 
 **Bulgarian** 
 ```
-$ cut -f2 -d' ' bg_freq.txt | apertium -d . bul-morph | paste <(cut -f1 -d' ' bg_freq.txt) - | sed 's/\t/ /g' > bulmorph.txt
+$ cut -f2 -d' ' bg_freq.txt | apertium -d . bul-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' bg_freq.txt) - | sed 's/\t/ /g' > bulmorph.txt
 
 $ head -15 bulmorph.txt
 
@@ -147,30 +147,30 @@ $ head -15 bulmorph.txt
 
 **Macedonian**
 ```
-$ cut -f2 -d' ' mk_freq.txt | apertium -d . mkd-morph | grep -v -P "^\s*$" | paste <(cut -f1 -d' ' mk_freq.txt) - | sed 's/\t/ /g' > mkdmorph.txt
+$ cut -f2 -d' ' mk_freq.txt | apertium -d . mkd-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' mk_freq.txt) - | sed 's/\t/ /g' > mkdmorph.txt
 
 $ head -15 mkdmorph.txt
 
 1819398 ^на/на<pr>$
 1147923 ^во/во<pr>$
-929090 ^и/и<cnjcoo>/clitic<prn><pos><clt><p3><f><sg>/clitic<prn><pers><clt><p3><f><sg><dat>$ ^од/од<pr>$
-701826 ^се/е<vbser><pres><p3><mf><pl>/clitic<prn><ref><pers><mfn><sp><acc>$
-643944 ^е/е<vbser><pres><p3><mf><sg>$
-472556 ^со/со<pr>$
-394170 ^за/за<pr>$
-388703 ^да/да<ij>/да<part>$
-288450 ^година/година<n><f><sg><nom><ind>$
-258352 ^како/како<adv>/како<pr>/како<prn><itg>/како<prn><rel>$
-201704 ^го/clitic<prn><pers><clt><p3><m><sg><acc>/clitic<prn><pers><clt><p3><nt><sg><acc>$
-178294 ^што/што<cnjsub>/што<prn><itg>/што<prn><rel>$
-125543 ^а/а<cnjcoo>$
-119110 ^ја/clitic<prn><pers><clt><p3><f><sg><acc>$
-118321 ^бил/е<vbser><lp><pii><p3><m><sg>/бие<vblex><impf><tv><lp><aor><m><sg>$
+929090 ^и/и<cnjcoo>/clitic<prn><pos><clt><p3><f><sg>/clitic<prn><pers><clt><p3><f><sg><dat>$
+701826 ^од/од<pr>$
+643944 ^се/е<vbser><pres><p3><mf><pl>/clitic<prn><ref><pers><mfn><sp><acc>$
+472556 ^е/е<vbser><pres><p3><mf><sg>$
+394170 ^со/со<pr>$
+388703 ^за/за<pr>$
+288450 ^да/да<ij>/да<part>$
+258352 ^година/година<n><f><sg><nom><ind>$
+201704 ^како/како<adv>/како<pr>/како<prn><itg>/како<prn><rel>$
+178294 ^го/clitic<prn><pers><clt><p3><m><sg><acc>/clitic<prn><pers><clt><p3><nt><sg><acc>$
+125543 ^што/што<cnjsub>/што<prn><itg>/што<prn><rel>$
+119110 ^а/а<cnjcoo>$
+118321 ^ја/clitic<prn><pers><clt><p3><f><sg><acc>$
 ```
 
 **Slovenian**
 ```
-$ apertium -d . slv-morph < sl_freq.txt | cut -f2 -d' ' | paste <(cut -f1 -d' ' sl_freq.txt) - | sed 's/\t/ /g' > slvmorph.txt
+$ cut -f2 -d' ' sl_freq.txt | apertium -d . slv-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' sl_freq.txt) - | sed 's/\t/ /g' > slvmorph.txt
 
 $ head -15 slvmorph.txt
 
@@ -198,7 +198,7 @@ $ head -15 slvmorph.txt
 
 **Croatian**
 ```
-$ cut -f2 -d' ' hr_freq.txt | apertium -d . hbs-morph | paste <(cut -f1 -d' ' hr_freq.txt) - | sed 's/\t/ /g' > hrmorph.txt
+$ cut -f2 -d' ' hr_freq.txt | apertium -d . hbs-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' hr_freq.txt) - | sed 's/\t/ /g' > hrmorph.txt
 
 $ head -15 hrmorph.txt
 
@@ -221,7 +221,7 @@ $ head -15 hrmorph.txt
 
 **Silesian**
 ```
-$ cut -f2 -d' ' szl_freq.txt | apertium -d . szl-morph | paste <(cut -f1 -d' ' szl_freq.txt) - | sed 's/\t/ /g' > szlmorph.txt
+$ cut -f2 -d' ' szl_freq.txt | apertium -d . szl-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' szl_freq.txt) - | sed 's/\t/ /g' > szlmorph.txt
 
 $ head -15 szlmorph.txt
 
@@ -240,4 +240,5 @@ $ head -15 szlmorph.txt
 1780 ^s/s<n><f><sp><indecl>$
 1759 ^sam/sam<adv>$
 1532 ^ludźi/*ludźi$
+
 ```
