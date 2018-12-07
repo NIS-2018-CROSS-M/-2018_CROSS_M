@@ -3,7 +3,7 @@
 **Pipeline**
 
 ```
-$ cut -f2 -d' ' FILENAME1 | apertium -d . MODULENAME-morph | paste <(cut -f1 -d' ' FILENAME1) - | sed 's/\t/ /g' > FILENAME2
+$ cut -f2 -d' ' FILENAME1 | apertium -d . MODULENAME-morph | grep -v -P "^\s*$" | sed 's/ /\n/g' | paste <(cut -f1 -d' ' FILENAME1) - | sed 's/\t/ /g' > FILENAME2
 
 ```
 
@@ -101,7 +101,7 @@ $ head ukrmorph.txt
 
 **Belarusian**
 ```
-$ cut -f2 -d' ' be_freq.txt | apertium -d . bel-morph | paste <(cut -f1 -d' ' be_freq.txt) - | sed 's/\t/ /g' > belmorph.txt
+cut -f2 -d' ' be_freq.txt | apertium -d . bel-morph | grep -v -P "^\s*$" | sed 's/ /\n/g' | paste <(cut -f1 -d' ' be_freq.txt) - | sed 's/\t/ /g' > belmorph.txt
 
 $ head -15 belmorph.txt
 
