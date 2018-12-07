@@ -206,7 +206,7 @@ $ head szl_freq.txt
 2016 uod
 ```
 
-Lines containing empty token values are deleted with the help of vim
+Lines containing empty token values are deleted with the help of vim.
 ```
 $ vim FILENAME2
 :d
