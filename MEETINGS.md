@@ -6,7 +6,7 @@
 ### Tasks
 
 * Oleg:
-    *calma code reimplementation
+    * calma code reimplementation
 * Vlad:
     * frequency lists
     * morphological analysis
