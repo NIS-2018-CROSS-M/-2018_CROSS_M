@@ -192,7 +192,25 @@ $ head -15 slvmorph.txt
 
 **Serbian**
 ```
+$ cut -f2 -d' ' sr_transliterated.txt | apertium -d . hbs-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' sr_transliterated.txt) - | sed 's/\t/ /g' > srmorph.txt
 
+$ head -15 srmorph.txt
+
+3086982 ^u/u<pr><gen>/u<pr><acc>/u<pr><loc>$
+3083916 ^je/on<prn><pers><clt><p3><f><sg><gen>/on<prn><pers><clt><p3><f><sg><acc>/biti<vbser><clt><pres><p3><sg>$
+1854467 ^i/i<cnjcoo>/i<ij>/i<num>/i<part><mod>$
+1142731 ^se/sebe<prn><ref><clt><pers><mfn><sp><acc>$
+1133315 ^na/na<pr><acc>/na<pr><loc>$
+836809 ^od/od<pr><gen>$
+720637 ^godine/godina<n><f><sg><gen>/godina<n><f><pl><nom>/godina<n><f><pl><acc>/godina<n><f><pl><voc>$
+658023 ^su/biti<vbser><clt><pres><p3><pl>$
+608754 ^iz/iz<pr><gen>$
+575334 ^naselje/naselje<n><nt><sg><nom>/naselje<n><nt><sg><acc>/naselje<n><nt><sg><voc>$
+546565 ^da/da<cnjsub>/da<part>/dati<vblex><perf><ref><pres><p3><sg>$
+484743 ^stanovnika/stanovnik<n><ma><sg><gen>/stanovnik<n><ma><sg><acc>/stanovnik<n><ma><pl><gen>$
+454609 ^za/za<pr><gen>/za<pr><acc>/za<pr><ins>$
+401795 ^sa/sa<pr><gen>/sa<pr><ins>$
+401637 ^prema/prema<pr><dat>/prema<pr><loc>$
 ```
 
 **Croatian**
