@@ -27,12 +27,12 @@ with open(sys.argv[2], 'r') as c:
         print(transliterated, end='')
 ```
 
+## Transliteration
+
 **How to use**
 ```
 $ python3 serbian_transliterator.py serbian_table sr_freq.txt > sr_transliterated.txt
 ```
-
-## Transliteration
 
 **Input example**
 ```
