@@ -5,7 +5,14 @@
 
 ### Tasks
 
-* Oleg: the code reimplementation
-* Vlad: data processing
-* Nastya: cognate research
-* Lorenzo: cognate research
+* Oleg:
+    *calma code reimplementation
+* Vlad:
+    * frequency lists
+    * morphological analysis
+* Nastya: 
+    * cognate research
+    * Serbian transliterator
+* Lorenzo:
+    * cognate research
+    * open-category forms extraction
