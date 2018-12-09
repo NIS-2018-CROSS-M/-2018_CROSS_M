@@ -14,5 +14,5 @@
 ## Cognate identification
 
 * [Siamese Convolutional Networks for Cognate Identification](https://pdfs.semanticscholar.org/1b8d/ee11e9acb617a4d5c9ef2576272bfe91b7a4.pdf)
-   
 * [Using context and phonetic features in models of etymological sound change](https://aclanthology.info/pdf/W/W12/W12-0215.pdf)
+* [Similarity dependent Chinese Restaurant Process for Cognate Identification in Multilingual Wordlists](http://aclweb.org/anthology/K18-1027)
