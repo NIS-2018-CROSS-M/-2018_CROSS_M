@@ -10,6 +10,7 @@
 * [A Neural Morphological Analyzer for Arapaho Verbs Learned from a Finite State Transducer](http://aclweb.org/anthology/W18-4802)
 * [A Resource-light Approach to Russian Morphology: Tagging Russian using Czech resources](http://ufal.mff.cuni.cz/~hana/bib/HanaFeldmanBrew2004-RusMorphLite.pdf)
 * [Cross-Lingual Morphological Tagging for Low-Resource Languages](http://www.aclweb.org/anthology/P16-1184)
+* [Cross-lingual, Character-Level Neural Morphological Tagging](https://www.aclweb.org/anthology/D17-1078)
    
 ## Cognate identification
 
