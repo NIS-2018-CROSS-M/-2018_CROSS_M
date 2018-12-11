@@ -12,6 +12,8 @@
 * [Cross-Lingual Morphological Tagging for Low-Resource Languages](http://www.aclweb.org/anthology/P16-1184)
 * [Cross-lingual, Character-Level Neural Morphological Tagging](https://www.aclweb.org/anthology/D17-1078)
 * [Multilingual Part-of-Speech Tagging with Bidirectional Long Short-Term Memory Models and Auxiliary Loss](http://anthology.aclweb.org/P16-2067)
+* [Neural Factor Graph Models for Cross-lingual Morphological Tagging](http://aclweb.org/anthology/P18-1247)
+* [A Universal Part-of-Speech Tagset](http://www.lrec-conf.org/proceedings/lrec2012/pdf/274_Paper.pdf)
    
 ## Cognate identification
 
