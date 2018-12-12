@@ -14,6 +14,7 @@
 * [Multilingual Part-of-Speech Tagging with Bidirectional Long Short-Term Memory Models and Auxiliary Loss](http://anthology.aclweb.org/P16-2067)
 * [Neural Factor Graph Models for Cross-lingual Morphological Tagging](http://aclweb.org/anthology/P18-1247)
 * [A Universal Part-of-Speech Tagset](http://www.lrec-conf.org/proceedings/lrec2012/pdf/274_Paper.pdf)
+* [Robust Multilingual Part-of-Speech Tagging via Adversarial Training](http://aclweb.org/anthology/N18-1089)
    
 ## Cognate identification
 
