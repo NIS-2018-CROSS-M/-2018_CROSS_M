@@ -4,17 +4,18 @@ import os
 
 filess = os.listdir(r"./frequency")
 for file in filess:
-    wordyes, wordno = [], []
-    with open(r"./frequency/" + file, "r", encoding="utf-8") as f:
-        for line in f.readlines():
-            if re.search("^[^<>]+$", line) is not None:
-                wordno.append(line)
-            else:
-                wordyes.append(line)
-    with open(r"./frequency/" + file[:3] + "yes.txt", "w+", encoding="utf-8") as y:
-        y.write("\n".join(wordyes))
-    with open(r"./frequency/" + file[:3] + "no.txt", "w+", encoding="utf-8") as n:
-        n.write("\n".join(wordno))
+    if re.search("morph", file) is not None:
+        wordyes, wordno = [], []
+        with open(r"./frequency/" + file, "r", encoding="utf-8") as f:
+            for line in f.readlines():
+                if re.search("^[^<>]+$", line) is not None:
+                    wordno.append(line)
+                else:
+                    wordyes.append(line)
+        with open(r"./frequency/" + file[:3] + "yes.txt", "w+", encoding="utf-8") as y:
+            y.write("\n".join(wordyes))
+        with open(r"./frequency/" + file[:3] + "no.txt", "w+", encoding="utf-8") as n:
+            n.write("\n".join(wordno))
 filess = os.listdir(r"./frequency")
 for file in filess:
     if re.search("yes", file) is not None:
@@ -32,4 +33,6 @@ for file in filess:
                         newfile.append("$\n")
                     printfile.append("/".join(newfile))
             with open(r"./frequency/" + file[:3] + "10000.txt", "w+", encoding="utf-8") as w:
+                for index, string in enumerate(printfile):
+                    printfile[index] = re.sub("[⁰¹²³⁴⁵⁶⁷⁸⁹]", "", string)
                 w.write("".join(printfile[:10000]))
