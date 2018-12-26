@@ -79,7 +79,7 @@ $ head -15 polmorph.txt
 ```
 $ cut -f2 -d' ' uk_freq.txt | apertium -d . ukr-morph | grep -v -P '^\s*$' | sed 's/ /\n/g' | paste <(cut -f1 -d' ' uk_freq.txt) - | sed 's/\t/ /g' > ukrmorph.txt
 
-$ head ukrmorph.txt
+$ head -15 ukrmorph.txt
 
 3775930 ^в/у<pr><gen>/у<pr><acc>/у<pr><loc>$
 3577218 ^у/у<pr><gen>/у<pr><acc>/у<pr><loc>$
