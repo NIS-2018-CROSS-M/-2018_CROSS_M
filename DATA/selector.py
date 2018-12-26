@@ -2,6 +2,12 @@ import re
 import os
 
 
+# Insert this file together with the folder where frequency apertium files, with morphological analysis, are located.
+# This program automatically split the frequency files in three lists: "no" list - made from words that apertium could not analyze,
+# "yes" list - made from words that apertium could analyze, and "10000" list - made from the 10000 most frequent words, that are
+# part of an open morphological class (adj, vblex, n)
+
+
 filess = os.listdir(r"./frequency")
 for file in filess:
     if re.search("morph", file) is not None:
