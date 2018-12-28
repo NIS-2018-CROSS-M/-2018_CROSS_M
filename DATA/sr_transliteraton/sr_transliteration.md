@@ -3,7 +3,6 @@
 **Python code**
 ```
 import sys
-import re
 
 
 serbian = {}
