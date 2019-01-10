@@ -14,9 +14,9 @@ def get_lang_code_from_freq_file_name(filename):
     return filename[:3]
 
 
-def process_frequency_files(freq_files_names):
-    analyzed_lines_files_names, not_analyzed_lines_files_names = [], []
-    for filename in freq_files_names:
+def process_frequency_files(freq_filenames):
+    analyzed_lines_filenames, not_analyzed_lines_filenames = [], []
+    for filename in freq_filenames:
         if "morph" in filename:
             words_analyzed_by_apertium, words_not_analyzed_by_apertium = [], []
 
@@ -30,38 +30,47 @@ def process_frequency_files(freq_files_names):
             output_filename_prefix = get_lang_code_from_freq_file_name(filename)
 
             analyzed_lines_filename = output_filename_prefix + "yes.txt"
-            analyzed_lines_files_names.append(analyzed_lines_filename)
+            analyzed_lines_filenames.append(analyzed_lines_filename)
 
             not_analyzed_lines_filename = output_filename_prefix + "no.txt"
-            not_analyzed_lines_files_names.append(not_analyzed_lines_filename)
+            not_analyzed_lines_filenames.append(not_analyzed_lines_filename)
 
             with open(r"./frequency/" + analyzed_lines_filename, "w+", encoding="utf-8") as analyzed_lines_file:
                 analyzed_lines_file.writelines(words_analyzed_by_apertium)
             with open(r"./frequency/" + not_analyzed_lines_filename, "w+", encoding="utf-8") as not_analyzed_lines_file:
                 not_analyzed_lines_file.writelines(words_not_analyzed_by_apertium)
 
-    return analyzed_lines_files_names, not_analyzed_lines_files_names
+    return analyzed_lines_filenames, not_analyzed_lines_filenames
 
 
-def get_n_highest_freq_lines(analyzed_lines_files_names):
-    for filename in analyzed_lines_files_names:
+def get_n_highest_freq_lines(analyzed_lines_filenames):
+    for filename in analyzed_lines_filenames:
         with open(r"./frequency/" + filename, "r", encoding="utf-8") as freq_f:
-            printfile = []
+            output_lines = []
             for line in freq_f.readlines():
-                newfile = []
-                aa = line.split("/")
-                newfile.append(aa[0])
-                for index, token in enumerate(aa):
-                    if token.find("<n>") is not -1 or token.find("<vblex>") is not -1 or token.find("<adj>") is not -1:
-                        newfile.append(token)
-                if len(newfile) > 1:
-                    if re.search("\$\\n", newfile[-1]) is None:
-                        newfile.append("$\n")
-                    printfile.append("/".join(newfile))
-            with open(r"./frequency/" + filename[:3] + "10000.txt", "w+", encoding="utf-8") as w:
-                for index, string in enumerate(printfile):
-                    printfile[index] = re.sub("[⁰¹²³⁴⁵⁶⁷⁸⁹]", "", string)
-                w.write("".join(printfile[:10000]))
+                line_as_list = line.split("/")
+
+                lexeme = line_as_list[0]
+                analyses = line_as_list[1:]
+                interesting_analyses = []
+
+                for analysis in analyses:
+                    if "<n>" in analysis or "<vblex>" in analysis or "<adj>" in analysis:
+                        interesting_analyses.append(analysis)
+
+                if interesting_analyses:
+                    if not interesting_analyses[-1].endswith("$\n"):
+                        interesting_analyses.append("$\n")
+
+                    output_lines.append(lexeme + "/" + "/".join(interesting_analyses))
+
+            output_filename = get_lang_code_from_freq_file_name(filename) + "10000.txt"
+
+            for index, string in enumerate(output_lines):
+                output_lines[index] = re.sub("[⁰¹²³⁴⁵⁶⁷⁸⁹]", "", string)
+            with open(r"./frequency/" + output_filename, "w+", encoding="utf-8") as output_file:
+                
+                output_file.write("".join(output_lines[:10000]))
 
 
 get_n_highest_freq_lines(process_frequency_files(os.listdir(r"./frequency"))[0])
