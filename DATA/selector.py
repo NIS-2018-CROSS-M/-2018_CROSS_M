@@ -1,7 +1,8 @@
 import re
 import os
+import argparse
 
-# WIP todo: refactoring !!!
+
 # Insert this file together with the folder where frequency apertium files, with morphological analysis, are located.
 # This program automatically split the frequency files in three lists:
 # "no" list - made from words that apertium could not analyze,
@@ -9,68 +10,92 @@ import os
 # "10000" list - made from the 10000 most frequent words, that are part of an open morphological class (adj, vblex, n)
 
 
-# todo: fix silesian lang_code bug
-def get_lang_code_from_freq_file_name(filename):
-    return filename[:3]
-
-
 def process_frequency_files(freq_filenames):
     analyzed_lines_filenames, not_analyzed_lines_filenames = [], []
     for filename in freq_filenames:
-        if "morph" in filename:
-            words_analyzed_by_apertium, words_not_analyzed_by_apertium = [], []
+        words_analyzed_by_apertium, words_not_analyzed_by_apertium = [], []
 
-            with open(r"./frequency/" + filename, "r", encoding="utf-8") as freq_f:
-                for line in freq_f.readlines():
+        try:
+            with open(filename, "r", encoding="utf-8") as freq_f:
+                for line in freq_f:
                     if "<" not in line and ">" not in line:
                         words_not_analyzed_by_apertium.append(line)
                     else:
                         words_analyzed_by_apertium.append(line)
+        except Exception as e:
+            print("problem when processing "+filename+" . Error "+str(e)+" . Skip...")
+            continue
 
-            output_filename_prefix = get_lang_code_from_freq_file_name(filename)
+        analyzed_lines_filename = filename + "-yes"
+        analyzed_lines_filenames.append(analyzed_lines_filename)
+        with open(analyzed_lines_filename, "w+", encoding="utf-8") as analyzed_lines_file:
+            analyzed_lines_file.writelines(words_analyzed_by_apertium)
 
-            analyzed_lines_filename = output_filename_prefix + "yes.txt"
-            analyzed_lines_filenames.append(analyzed_lines_filename)
-
-            not_analyzed_lines_filename = output_filename_prefix + "no.txt"
-            not_analyzed_lines_filenames.append(not_analyzed_lines_filename)
-
-            with open(r"./frequency/" + analyzed_lines_filename, "w+", encoding="utf-8") as analyzed_lines_file:
-                analyzed_lines_file.writelines(words_analyzed_by_apertium)
-            with open(r"./frequency/" + not_analyzed_lines_filename, "w+", encoding="utf-8") as not_analyzed_lines_file:
-                not_analyzed_lines_file.writelines(words_not_analyzed_by_apertium)
+        not_analyzed_lines_filename = filename + "-no"
+        not_analyzed_lines_filenames.append(not_analyzed_lines_filename)
+        with open(not_analyzed_lines_filename, "w+", encoding="utf-8") as not_analyzed_lines_file:
+            not_analyzed_lines_file.writelines(words_not_analyzed_by_apertium)
 
     return analyzed_lines_filenames, not_analyzed_lines_filenames
 
 
-def get_n_highest_freq_lines(analyzed_lines_filenames):
-    for filename in analyzed_lines_filenames:
-        with open(r"./frequency/" + filename, "r", encoding="utf-8") as freq_f:
+def get_interesting_analyses_from_lexeme_analysis_line(line, interesting_classes=("<n>", "<vblex>", "<adj>")):
+    line_as_list = line.split("/")
+    lexeme = line_as_list[0]
+    analyses = line_as_list[1:]
+    interesting_analyses = []
+    for analysis in analyses:
+        if any((interesting_class in analysis) for interesting_class in interesting_classes):
+            pretty_analysis = re.sub("[⁰¹²³⁴⁵⁶⁷⁸⁹]", "", analysis)
+            interesting_analyses.append(pretty_analysis)
+    if interesting_analyses:
+        if not interesting_analyses[-1].endswith("$\n"):
+            # the format of analyses list requires the list to end up with $ sign and a newline
+            interesting_analyses.append("$\n")
+
+    return lexeme, interesting_analyses
+
+
+def get_n_highest_freq_lines(analyzed_lexemes_filenames, top_n_number=10000):
+    for filename in analyzed_lexemes_filenames:
+        with open(filename, "r", encoding="utf-8") as freq_f:
             output_lines = []
-            for line in freq_f.readlines():
-                line_as_list = line.split("/")
-
-                lexeme = line_as_list[0]
-                analyses = line_as_list[1:]
-                interesting_analyses = []
-
-                for analysis in analyses:
-                    if "<n>" in analysis or "<vblex>" in analysis or "<adj>" in analysis:
-                        interesting_analyses.append(analysis)
+            for line in freq_f:
+                lexeme, interesting_analyses = get_interesting_analyses_from_lexeme_analysis_line(line)
 
                 if interesting_analyses:
-                    if not interesting_analyses[-1].endswith("$\n"):
-                        interesting_analyses.append("$\n")
-
                     output_lines.append(lexeme + "/" + "/".join(interesting_analyses))
 
-            output_filename = get_lang_code_from_freq_file_name(filename) + "10000.txt"
-
-            for index, string in enumerate(output_lines):
-                output_lines[index] = re.sub("[⁰¹²³⁴⁵⁶⁷⁸⁹]", "", string)
-            with open(r"./frequency/" + output_filename, "w+", encoding="utf-8") as output_file:
-                
-                output_file.write("".join(output_lines[:10000]))
+            output_filename = filename + "-top" + str(top_n_number)
+            with open(output_filename, "w+", encoding="utf-8") as output_file:
+                output_file.write("".join(output_lines[:top_n_number]))
 
 
-get_n_highest_freq_lines(process_frequency_files(os.listdir(r"./frequency"))[0])
+def process_files(filenames):
+    analyzed_lexemes_filenames = process_frequency_files(filenames)[0]
+    get_n_highest_freq_lines(analyzed_lexemes_filenames)
+
+
+def process_files_in_dir(path_to_dir):
+    files_in_dir = os.listdir(path_to_dir)
+    process_files([os.path.join(path_to_dir, f_name) for f_name in files_in_dir])
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="""Extract top 10000 morphologically analyzed lexemes from the frequency \\t apertium-analysis files.
+    If no arguments provided will try to process all the files in the current directory""")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('-d', "--directory", metavar='D', nargs=1, help='process all the files in the direcrory D')
+    group.add_argument('-f', "--files", metavar='FILES', nargs='+', help='process all the files in the list FILES')
+    args = parser.parse_args()
+
+    if args.files:
+        process_files(args.files)
+    elif args.directory:
+        process_files_in_dir(args.directory[0])
+    else:
+        process_files_in_dir(os.curdir)
+
+
+main()
