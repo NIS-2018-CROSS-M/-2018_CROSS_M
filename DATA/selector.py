@@ -39,9 +39,9 @@ def process_frequency_files(freq_filenames):
     return analyzed_lines_filenames, not_analyzed_lines_filenames
 
 
-def get_interesting_analyses_from_lexeme_analysis_line(line, interesting_classes=("<n>", "<vblex>", "<adj>")):
+def get_interesting_analyses_from_word_form_analysis_line(line, interesting_classes=("<n>", "<vblex>", "<adj>")):
     line_as_list = line.split("/")
-    lexeme = line_as_list[0]
+    word_form = line_as_list[0]
     analyses = line_as_list[1:]
     interesting_analyses = []
     for analysis in analyses:
@@ -53,18 +53,18 @@ def get_interesting_analyses_from_lexeme_analysis_line(line, interesting_classes
             # the format of analyses list requires the list to end up with $ sign and a newline
             interesting_analyses.append("$\n")
 
-    return lexeme, interesting_analyses
+    return word_form, interesting_analyses
 
 
-def get_n_highest_freq_lines(analyzed_lexemes_filenames, top_n_number=10000):
-    for filename in analyzed_lexemes_filenames:
+def get_n_highest_freq_lines(analyzed_word_forms_filenames, top_n_number=10000):
+    for filename in analyzed_word_forms_filenames:
         with open(filename, "r", encoding="utf-8") as freq_f:
             output_lines = []
             for line in freq_f:
-                lexeme, interesting_analyses = get_interesting_analyses_from_lexeme_analysis_line(line)
+                word_form, interesting_analyses = get_interesting_analyses_from_word_form_analysis_line(line)
 
                 if interesting_analyses:
-                    output_lines.append(lexeme + "/" + "/".join(interesting_analyses))
+                    output_lines.append(word_form + "/" + "/".join(interesting_analyses))
 
             output_filename = filename + "-top" + str(top_n_number)
             with open(output_filename, "w+", encoding="utf-8") as output_file:
@@ -72,8 +72,8 @@ def get_n_highest_freq_lines(analyzed_lexemes_filenames, top_n_number=10000):
 
 
 def process_files(filenames):
-    analyzed_lexemes_filenames = process_frequency_files(filenames)[0]
-    get_n_highest_freq_lines(analyzed_lexemes_filenames)
+    analyzed_word_forms_filenames = process_frequency_files(filenames)[0]
+    get_n_highest_freq_lines(analyzed_word_forms_filenames)
 
 
 def process_files_in_dir(path_to_dir):
@@ -83,7 +83,7 @@ def process_files_in_dir(path_to_dir):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="""Extract top 10000 morphologically analyzed lexemes from the frequency \\t apertium-analysis files.
+        description="""Extract top 10000 morphologically analyzed word_forms from the frequency \\t apertium-analysis files.
     If no arguments provided will try to process all the files in the current directory""")
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-d', "--directory", metavar='D', nargs=1, help='process all the files in the direcrory D')
