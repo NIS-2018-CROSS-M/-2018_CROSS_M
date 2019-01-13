@@ -13,5 +13,5 @@
 
 * Nastya Khorosheva
 * Oleg Serikov
-* Lorenzo Tozi
+* Lorenzo Tosi
 * Vlad Mikhailov
