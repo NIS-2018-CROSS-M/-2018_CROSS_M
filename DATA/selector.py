@@ -3,11 +3,25 @@ import os
 import argparse
 
 
-# Insert this file together with the folder where frequency apertium files, with morphological analysis, are located.
+# Apply this script to select top N open-class words from the frequency files
 # This program automatically split the frequency files in three lists:
 # "no" list - made from words that apertium could not analyze,
 # "yes" list - made from words that apertium could analyze,
 # "10000" list - made from the 10000 most frequent words, that are part of an open morphological class (adj, vblex, n)
+
+
+# oleg@DESKTOP-8LKO59R:/mnt/c/Users/olegs/cross-lingual-morph-analysis$ python DATA/selector.py --help
+# usage: selector.py [-h] [-d D | -f FILES [FILES ...]]
+#
+# Extract top 10000 morphologically analyzed word_forms from the frequency \t
+# apertium-analysis files. If no arguments provided will try to process all the
+# files in the current directory
+#
+# optional arguments:
+#   -h, --help            show this help message and exit
+#   -d D, --directory D   process all the files in the direcrory D
+#   -f FILES [FILES ...], --files FILES [FILES ...]
+#                         process all the files in the list FILES
 
 
 def process_frequency_files(freq_filenames):
