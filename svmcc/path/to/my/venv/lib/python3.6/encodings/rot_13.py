@@ -1,0 +1,1 @@
+/Users/vladternovskij/anaconda3/lib/python3.6/encodings/rot_13.py
