@@ -1,5 +1,5 @@
 #%% [markdown]
-#  ## set up telegram notifications
+# ## set up telegram notifications
 # 
 #  не очень понятно, нужно ли это. если нужно -- напишите @oserikov в телеграме, я расскажу, что сделать, чтобы присылались сообщения с качеством модели когда она отработает.
 
@@ -14,13 +14,13 @@ if telegram_notifications_enabled:
     chat_id = "292749902" # for @oserikov
 
 #%% [markdown]
-#  # prepare
+# # prepare
 
 #%%
 import sys
 
 #%% [markdown]
-#  #### install prereqs
+# #### install prereqs
 
 #%%
 
@@ -55,7 +55,7 @@ get_ipython().system('rm onmt-data/*')
 get_ipython().system('rm results/*')
 
 #%% [markdown]
-#  #### imports
+# #### imports
 
 #%%
 from collections import defaultdict as dd
@@ -64,7 +64,7 @@ import re
 import urllib
 
 #%% [markdown]
-#  ## helping functions definitions
+# ## helping functions definitions
 
 #%%
 def score_predictions(res_file_fn, gold_file_fn, output_fn, dataEvaluator):   
@@ -132,7 +132,7 @@ def choose_best_predictions(nbest_filename, covered_filename, output_filename):
     get_ipython().system('cat {nbest_filename} | grep -v -P "^\\s+" | grep -v -P "^\\+" | {sys.executable} scripts/get-analyses.py 0.8 3 {covered_filename} > {output_filename}')
 
 #%% [markdown]
-#  #### def data_generation
+# #### def data_generation
 
 #%%
 # the method called for each non-processed training data row
@@ -177,7 +177,7 @@ def generate_onmt_data(fn, res_src_fn, res_tgt_fn, DataModifyerClass):
             print(modify_tgt_line(a), file = res_tgt)
 
 #%% [markdown]
-#  ### def ml()
+# ### def ml()
 
 #%%
 class MLUtil:
@@ -218,9 +218,9 @@ class MLUtil:
 
 
 #%% [markdown]
-#  # ML
+# # ML
 #%% [markdown]
-#  ## set ml params
+# ## set ml params
 
 #%%
 langs=['crh']
@@ -248,9 +248,9 @@ pred_params = [
 ]
 
 #%% [markdown]
-#  ## Baseline approach
+# ## Baseline approach
 #%% [markdown]
-#  #### data description
+# #### data description
 #%% [markdown]
 #  **source**
 #  ```
@@ -286,13 +286,13 @@ pred_params = [
 # 
 # 
 #%% [markdown]
-#  #### embeddings
+# #### embeddings
 #  * character-level input embeddings
 #  * character-level output embeddings
 #  * learned
 #  * initialized with random
 #%% [markdown]
-#  #### data modification
+# #### data modification
 
 #%%
 class TrainDataModifyer:
@@ -333,7 +333,7 @@ class DataEvaluator:
         return data
 
 #%% [markdown]
-#  #### ml
+# #### ml
 
 #%%
 class CognatesTool:
@@ -481,7 +481,7 @@ def ml(langs, tracks, train_params, prediction_params, dataModifyer, nbestModify
 ml(langs, tracks, train_params, pred_params, TrainDataModifyer, NBestDataModifyer, DataEvaluator)
 
 #%% [markdown]
-#  # sandbox
+# # sandbox
 
 #%%
 
