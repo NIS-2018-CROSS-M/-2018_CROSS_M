@@ -1,7 +1,7 @@
 #%% [markdown]
 # ## set up telegram notifications
 # 
-# не очень понятно, нужно ли это. если нужно -- напишите @oserikov в телеграме, я расскажу, что сделать, чтобы присылались сообщения с качеством модели когда она отработает. 
+# не очень понятно, нужно ли это. если нужно -- напишите @oserikov в телеграме, я расскажу, что сделать, чтобы присылались сообщения с качеством модели когда она отработает.
 
 #%%
 telegram_notifications_enabled=False
@@ -178,12 +178,17 @@ def generate_onmt_data(fn, res_src_fn, res_tgt_fn, DataModifyerClass):
 # ### def ml()
 
 #%%
-def ml(langs, tracks, train_params, prediction_params, dataModifyer, nbestModifyer, dataEvaluator):
-    
-    def generate_data(orig_data_fn, res_src_fn, res_tgt_fn):
-        return generate_onmt_data(orig_data_fn, res_src_fn, res_tgt_fn, dataModifyer)
+class MLUtil:
+    def __init__(self, prediction_params, dataModifyer, nbestModifyer):
+        self.dataModifyer = dataModifyer
+        self.nbestModifyer = nbestModifyer
+        self.prediction_params = prediction_params
 
-    def train(train_res_src_fn, train_res_tgt_fn, val_res_src_fn, val_res_tgt_fn, save_model_fn, train_params):
+
+    def generate_data(self, orig_data_fn, res_src_fn, res_tgt_fn):
+        return generate_onmt_data(orig_data_fn, res_src_fn, res_tgt_fn, self.dataModifyer)
+
+    def train(self, train_res_src_fn, train_res_tgt_fn, val_res_src_fn, val_res_tgt_fn, save_model_fn, train_params):
         data_fn = save_model_fn + "-prepared_training_data" #f"onmt-data/{lang}-track{track}"    
         initialize_data(train_res_src_fn, train_res_tgt_fn, val_res_src_fn, val_res_tgt_fn, data_fn)
 
@@ -192,67 +197,23 @@ def ml(langs, tracks, train_params, prediction_params, dataModifyer, nbestModify
         get_ipython().system('mv {save_model_fn}_step_{train_steps}.pt {save_model_fn}')
 
     
-    def predict(model_filename, input_data_filename, covered_filename, chosen_output_filename):
+    def predict(self, model_filename, input_data_filename, covered_filename, chosen_output_filename):
         output_data_filename = f"{input_data_filename}.out"
         nbest_output_filename = f"{input_data_filename}.nbest.out"
-        prediction_params.extend([
+        self.prediction_params.extend([
             f"-model {model_filename}",
             f"-src {input_data_filename}",
             f"-output {output_data_filename}"
         ])
-        generate_predictions(prediction_params, nbest_output_filename)
+        generate_predictions(self.prediction_params, nbest_output_filename)
         nbest_output_modified_filename = nbest_output_filename+"-modified"
-        modify_nbest(nbest_output_filename, nbest_output_modified_filename, nbestModifyer)
+        modify_nbest(nbest_output_filename, nbest_output_modified_filename, self.nbestModifyer)
         choose_best_predictions(nbest_output_modified_filename, covered_filename, chosen_output_filename)
 
-    
-    for lang in langs:
-        for track in tracks:
-            train_covered_filename = f"train/{lang}-track{track}-covered"
-            train_uncovered_filename = f"train/{lang}-track{track}-uncovered"
-            val_covered_filename = f"dev/{lang}-covered"
-            val_uncovered_filename = f"dev/{lang}-uncovered"
-            test_covered_filename = f"test/{lang}-covered"
-            test_uncovered_filename = f"test/{lang}-uncovered"
-
-            train_res_src_filename = f"onmt-data/{lang}-track{track}-src-train.txt"
-            train_res_tgt_filename = f"onmt-data/{lang}-track{track}-tgt-train.txt"
-
-            val_res_src_filename = f"onmt-data/{lang}-track{track}-src-dev.txt"
-            val_res_tgt_filename = f"onmt-data/{lang}-track{track}-tgt-dev.txt"
-
-            test_res_src_filename = f"onmt-data/{lang}-track{track}-src-test.txt"
-            test_res_tgt_filename = f"onmt-data/{lang}-track{track}-tgt-test.txt"
 
 
-            generate_data(train_uncovered_filename, train_res_src_filename, train_res_tgt_filename)        
-            generate_data(val_uncovered_filename, val_res_src_filename, val_res_tgt_filename)
+#%%
 
-            model_filename = f"models/{lang}-track{track}.model"
-            train(train_res_src_filename, train_res_tgt_filename, val_res_src_filename, val_res_tgt_filename, model_filename, train_params)
-
-
-            score_log_filename = f"{lang}-{track}-score.log"
-            get_ipython().system('echo "" > {score_log_filename}')
-
-            generate_data(test_covered_filename, test_res_src_filename, test_res_tgt_filename)
-            test_pred_output_filename = f"results/{lang}-track{track}-test-covered.sys"
-            predict(model_filename, test_res_src_filename, test_covered_filename, test_pred_output_filename)
-            get_ipython().system('echo "*===QUALITY ON TEST DATA===*" >> {score_log_filename}')
-            score_predictions(test_pred_output_filename, test_uncovered_filename, score_log_filename, dataEvaluator)
-
-            val_pred_output_filename = f"results/{lang}-track{track}-dev-covered.sys"
-            predict(model_filename, val_res_src_filename, val_covered_filename, val_pred_output_filename)
-            get_ipython().system('echo "*===QUALITY ON VAL DATA===*" >> {score_log_filename}')
-            score_predictions(val_pred_output_filename, val_uncovered_filename, score_log_filename, dataEvaluator)
-
-            get_ipython().system('cat {score_log_filename}')
-            
-            if telegram_notifications_enabled:
-                telegram_message = "#score\n"+''.join(open(score_log_filename).readlines())+'\n'+EXP_DESCRIPTION
-
-                telegram_message_encoded = urllib.parse.quote(telegram_message)
-                get_ipython().system('curl -i -X GET "https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={telegram_message_encoded}&parse_mode=markdown"')
 
 #%% [markdown]
 # # ML
@@ -260,8 +221,8 @@ def ml(langs, tracks, train_params, prediction_params, dataModifyer, nbestModify
 # ## set ml params
 
 #%%
-langs=['ast']
-tracks=['1']
+langs=['crh']
+tracks=['2']
 data_classes = ['test', 'dev']
 
 train_steps=1000
@@ -289,45 +250,45 @@ pred_params = [
 #%% [markdown]
 # #### data description
 #%% [markdown]
-# **source**
-# ```
-# wf1 wf2 ... wfN
-# ```
+#  **source**
+#  ```
+#  wf1 wf2 ... wfN
+#  ```
 # 
-# **target**
-# ```
-# l1 l2 ... lN +POS +Tag1=Value1 ... +TagN=ValueN +Language=langCode
-# ```
+#  **target**
+#  ```
+#  l1 l2 ... lN +POS +Tag1=Value1 ... +TagN=ValueN +Language=langCode
+#  ```
 # 
-# **uncovered**
-# (tab separated)
-# ```
-# langCode	wordForm	lemma	POS	Tag1=Value1|...|TagN=ValueN
-# ```
+#  **uncovered**
+#  (tab separated)
+#  ```
+#  langCode	wordForm	lemma	POS	Tag1=Value1|...|TagN=ValueN
+#  ```
 # 
-# **prediction** raw
-# ```
-# SENT 1: ['wf1', 'wf2', ..., 'wfN']
-# ...
-# [-9.2825] ['c', 'o', 'n', 'v', 'i', 'd', 'u', '+NOUN', '+Gender=Masc', '+Number=Plur', '+Language=ast']
-# ```
-# **prediction** passed to `eval()`
-# ```
-# ['l1', 'l2', ..., 'lN', '+POS', '+Tag1=Value1', ..., '+TagN=ValueN', '+Language=langCode']
-# ```
+#  **prediction** raw
+#  ```
+#  SENT 1: ['wf1', 'wf2', ..., 'wfN']
+#  ...
+#  [-9.2825] ['c', 'o', 'n', 'v', 'i', 'd', 'u', '+NOUN', '+Gender=Masc', '+Number=Plur', '+Language=ast']
+#  ```
+#  **prediction** passed to `eval()`
+#  ```
+#  ['l1', 'l2', ..., 'lN', '+POS', '+Tag1=Value1', ..., '+TagN=ValueN', '+Language=langCode']
+#  ```
 # 
-# prediction then is converted to follow the uncovered file pattern
-# ```
-# langCode	wordForm	lemma	POS	Tag1=Value1|...|TagN=ValueN
-# ```
-# 
+#  prediction then is converted to follow the uncovered file pattern
+#  ```
+#  langCode	wordForm	lemma	POS	Tag1=Value1|...|TagN=ValueN
+#  ```
+#
 # 
 #%% [markdown]
 # #### embeddings
-# * character-level input embeddings
-# * character-level output embeddings
-# * learned
-# * initialized with random
+#  * character-level input embeddings
+#  * character-level output embeddings
+#  * learned
+#  * initialized with random
 #%% [markdown]
 # #### data modification
 
@@ -373,10 +334,73 @@ class DataEvaluator:
 # #### ml
 
 #%%
+
+def ml(langs, tracks, train_params, prediction_params, dataModifyer, nbestModifyer, dataEvaluator):
+    mlUtil = MLUtil(prediction_params, dataModifyer, nbestModifyer)
+    for lang in langs:
+        for track in tracks:
+
+            # filenames, many of them
+            train_covered_filename = f"train/{lang}-track{track}-covered"
+            train_uncovered_filename = f"train/{lang}-track{track}-uncovered"
+            train_res_src_filename = f"onmt-data/{lang}-track{track}-src-train.txt"
+            train_res_tgt_filename = f"onmt-data/{lang}-track{track}-tgt-train.txt"
+
+            test_covered_filename = f"test/{lang}-covered"
+            test_uncovered_filename = f"test/{lang}-uncovered"
+            test_res_src_filename = f"onmt-data/{lang}-track{track}-src-test.txt"
+            test_res_tgt_filename = f"onmt-data/{lang}-track{track}-tgt-test.txt"
+            test_pred_output_filename = f"results/{lang}-track{track}-test-covered.sys" # output :)
+
+            val_covered_filename = f"dev/{lang}-covered"
+            val_uncovered_filename = f"dev/{lang}-uncovered"
+            val_res_src_filename = f"onmt-data/{lang}-track{track}-src-dev.txt"
+            val_res_tgt_filename = f"onmt-data/{lang}-track{track}-tgt-dev.txt"
+            val_pred_output_filename = f"results/{lang}-track{track}-dev-covered.sys" # output :)
+
+
+            model_filename = f"models/{lang}-track{track}.model"
+
+            score_log_filename = f"{lang}-{track}-score.log"
+            get_ipython().system(f'touch {score_log_filename}')
+
+
+            # ml| data preprocessing
+            mlUtil.generate_data(train_uncovered_filename, train_res_src_filename, train_res_tgt_filename)
+            mlUtil.generate_data(val_uncovered_filename, val_res_src_filename, val_res_tgt_filename)
+            mlUtil.generate_data(test_covered_filename, test_res_src_filename, test_res_tgt_filename)
+
+            # ml| training
+            mlUtil.train(train_res_src_filename, train_res_tgt_filename, val_res_src_filename, val_res_tgt_filename, model_filename, train_params)
+
+            # ml| predict and eval for test
+            mlUtil.predict(model_filename, test_res_src_filename, test_covered_filename, test_pred_output_filename)
+            get_ipython().system(f'echo "*===QUALITY ON TEST DATA===*" >> {score_log_filename}')
+            score_predictions(test_pred_output_filename, test_uncovered_filename, score_log_filename, dataEvaluator)
+
+
+            # ml| predict and eval for val
+            mlUtil.predict(model_filename, val_res_src_filename, val_covered_filename, val_pred_output_filename)
+
+
+            get_ipython().system(f'echo "*===QUALITY ON VAL DATA===*" >> {score_log_filename}')
+            score_predictions(val_pred_output_filename, val_uncovered_filename, score_log_filename, dataEvaluator)
+
+            # log eval results
+            get_ipython().system(f'cat {score_log_filename}')
+
+            # send eval to @oserikov at telegram
+            if telegram_notifications_enabled:
+                telegram_message = f"#score\n{lang}\n{track}\n"+''.join(open(score_log_filename).readlines())+'\n'+EXP_DESCRIPTION
+
+                telegram_message_encoded = urllib.parse.quote(telegram_message)
+                get_ipython().system(f'curl -i -X GET "https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={telegram_message_encoded}&parse_mode=markdown"')
+
+
+#%%
 ml(langs, tracks, train_params, pred_params, TrainDataModifyer, NBestDataModifyer, DataEvaluator)
 
 #%% [markdown]
 # # sandbox
 
 #%%
-
