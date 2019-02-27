@@ -113,8 +113,7 @@ class NBestDataModifyer:
         line_splitted[1] = (line_splitted[1].split(']')[0])
         if len(line_splitted) < 2 or line_splitted[1] == "":
             line_splitted[1] = '\'?\''
-        return line_splitted[0] + '] [' + ', '.join(
-            [line_splitted[1], '\'+NOUN\'', '\'+Tag1=Value1\'', '\'+Tag2=Value2\'', '\'+Language=lan\'']) + ']'
+        return line_splitted[0] + '] [' + ', '.join([line_splitted[1], '\'+NOUN\'', '\'+Tag1=Value1\'', '\'+Tag2=Value2\'', '\'+Language=lan\'']) + ']'
 
 
 class DataEvaluator:
