@@ -109,7 +109,7 @@ class NBestDataModifyer:
     @staticmethod
     def hyp_to_baseline_compatible(line):
         line_splitted = line.split('] [')
-        line_splitted[1] = (line_splitted[1].split(']')[0])
+        line_splitted[1] = line_splitted[1].rstrip(']')  # (line_splitted[1].split(']')[0])
         if len(line_splitted) < 2 or line_splitted[1] == "":
             line_splitted[1] = '\'+Tag0=?\''
         return line_splitted[0] + '] [' + ', '.join(['\'c\'', '\'c\'', '\'+NOUN\'', line_splitted[1], '\'+Language=lan\'']) + ']'
