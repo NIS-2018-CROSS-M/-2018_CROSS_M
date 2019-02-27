@@ -8,7 +8,7 @@
 
 #%%
 telegram_notifications_enabled=False
-EXP_DESCRIPTION = "BASELINE"
+EXP_DESCRIPTION = "PREDICT ONLY LEMMA"
 
 if telegram_notifications_enabled:
     bot_token = input("введите telegram bot token: ")
@@ -110,7 +110,7 @@ class NBestDataModifyer:
     @staticmethod
     def hyp_to_baseline_compatible(line):
         line_splitted = line.split('] [')
-        line_splitted[1] = (line_splitted[1].split(']')[0])
+        line_splitted[1] = line_splitted[1].rstrip(']')  # (line_splitted[1].split(']')[0])
         if len(line_splitted) < 2 or line_splitted[1] == "":
             line_splitted[1] = '\'?\''
         return line_splitted[0] + '] [' + ', '.join([line_splitted[1], '\'+NOUN\'', '\'+Tag1=Value1\'', '\'+Tag2=Value2\'', '\'+Language=lan\'']) + ']'
