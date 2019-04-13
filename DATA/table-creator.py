@@ -132,3 +132,16 @@ with open(r'E:\Lorenzo Tosi\OneDrive\Documenti\Program\NIS-FREQ\hrmorph.txt-yes-
             gloss = gloss.replace('VerbForm=Part|VerbForm=Vadv', '|' + 'VerbForm=Vadv')
             if '<' in gloss:
                 print(surface_form, lemma_and_pos, gloss, sep='\t', file=open(r'E:\Lorenzo Tosi\OneDrive\Documenti\Program\NIS-FREQ\testfile.txt', 'a+', encoding='utf8'))
+
+               
+            # 13 Apr 2019 
+#ADD:
+# for rus:
+    # <fac> = factual, (don't add this one наверн)
+    # <itg> = interrogative (vblex, adv, adj)
+    # cmp = Degree = Copm
+    
+# for hr: (croatian)
+    # lp = ??
+# also .conllu files (in chat)    
+    
