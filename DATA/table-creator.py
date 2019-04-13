@@ -137,7 +137,7 @@ with open(r'E:\Lorenzo Tosi\OneDrive\Documenti\Program\NIS-FREQ\hrmorph.txt-yes-
             # 13 Apr 2019 
 #ADD:
 # for rus:
-    # <fac> = factual, (don't add this one наверн)
+    # <fac> = factual (vblex), (don't add this one наверн, эта разметка на типы глагола есть только в Апертиуме, нет в UD)
     # <itg> = interrogative (vblex, adv, adj)
     # cmp = Degree = Copm
     
