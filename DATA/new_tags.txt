@@ -1,0 +1,84 @@
+file: belmorph.txt
+unknown tags:
+<cmp>
+--
+--
+file: cesmorph.txt
+unknown tags:
+
+<tgv> = transgressive =  ‘Trans’ in (UD v1) and has been renamed ‘Conv’ (UD v2).
+
+<itg> = interrogative = Int (UD)
+
+<po> = ?? possessive? 
+--
+file: hrmorph.txt
+unknown tags:
+
+<inf>+htjeti - всегда ходят такой цепочкой: <inf>+htjeti<vbmod>. htjeti - from Proto-Slavic *xъtěti, cognate with Russian хотеть (xotetʹ), Ukrainian хотіти (xotity). Здесь выражение “хотеть+инфинитив” и хотеть рассматривается как модальный 
+
+<f>+pos ??? встречается в комбинации <n><f>+pos<adj> - вероятно это: сущ.женского рода + притяжательное прилагательное 
+ 
+<vbmod> = modal verb = не знаю как поделать в UD, у них много тегов для модальности (https://universaldependencies.org/u/feat/Mood.html)
+
+<ssup> = super-superlative = Abs (absolute superlative) (UD)
+
+<itg> = interrogative =  Int (UD)
+
+<mi>+pos
+
+<clt>
+
+<ma>+pos
+
+<futI>
+
+<nt>+pos
+
+<imperf>
+--
+file: mkdmorph.txt
+unknown tags:
+<prx>
+<dst>
+--
+file: polmorph.txt
+unknown tags:
+<nm>
+<dim>
+<cni>
+<itg>
+<po>
+<mp>
+--
+file: rusmorph.txt
+unknown tags:
+<cmp>
+<itg>
+<fac>
+--
+file: slvmorph.txt
+unknown tags:
+<ela>
+<supn>
+<imperf>
+--
+file: srmorph.txt
+unknown tags:
+<inf>+htjeti
+<f>+pos
+<vbmod>
+<ssup>
+<itg>
+<mi>+pos
+<clt>
+<ma>+pos
+<futI>
+<nt>+pos
+<imperf>
+--
+file: ukrmorph.txt
+unknown tags:
+<itg>
+<nonpast>
+--
