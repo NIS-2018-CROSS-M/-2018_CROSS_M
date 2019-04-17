@@ -1,11 +1,7 @@
 file: belmorph.txt
 DONE
 file: cesmorph.txt
-unknown tags:
-
-<tgv> = transgressive =  ‘Trans’ in (UD v1) and has been renamed ‘Conv’ (UD v2).
-
-<po> = ?? possessive? 
+DONE
 --
 file: hrmorph.txt
 unknown tags:

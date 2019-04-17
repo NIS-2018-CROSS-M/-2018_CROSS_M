@@ -42,7 +42,8 @@ udtags = {
     '<imp>': 'Mood=Imp',
     '<pp><adv>': ('Tense=Past', 'VerbForm=Vadv'),
     '<pprs><adv>': ('Tense=Pres', 'VerbForm=Vadv'),
-    '<tgv><pprs>': 'VerbForm=Trans',  # VerbForm=Conv as per UD V2 guidelines? Form is Transgressive Participle
+    '<tgv><pprs>': 'VerbForm=Conv',
+    '<tgv>': 'VerbForm=Conv', # in some perfective readings the pprs tag is not included
     '<pp>': ('Tense=Past', 'VerbForm=Part'),
     '<pprs>': ('Tense=Pres', 'VerbForm=Part'),
     '<inf>': 'VerbForm=Inf',
@@ -73,19 +74,20 @@ udtags = {
     '<fac>': 'VerbType=Fact',  # don't add this one наверн, эта разметка на типы глагола есть только в Апертиуме
     '<itg>': 'Type=Inter',  # Possible for verbs as well as for adj and adv, check how to tag properly
     '<cmp>': 'Degree=Com',
-    '<prx>': 'Definite=Prx', # Proximal defined article, Macedonian (no UD model)
-    '<dst>': 'Definite=Dst', # Distal defined article, Macedonian (no UD model)
+    '<prx>': 'Definite=Prx',  # Proximal defined article, Macedonian (no UD model)
+    '<dst>': 'Definite=Dst',  # Distal defined article, Macedonian (no UD model)
+    '<adj><po>': 'ADV'  # Czech, chorvatsky = по-хорватски, it is an "adverbiated adjective"
 }
 
 
-with open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\mkdmorph.txt-yes-top', 'r', encoding='utf8') as f:
+with open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\cesmorph.txt-yes-top', 'r', encoding='utf8') as f:
     analyses = []
     for line in f:
         analyses.append(line.split()[1].strip('^$'))
 
     for analysis in analyses:
         for aptag in udtags.keys():
-            if aptag == '<n>' or aptag == '<vblex>' or aptag == '<adj>':
+            if aptag == '<n>' or aptag == '<vblex>' or aptag == '<adj>' or aptag == '<adj><po>':
                 analysis = analysis.replace(aptag, '\t' + udtags[aptag])
             elif aptag == '<ma>' or aptag == '<mi>' or aptag == '<pp>' or aptag == '<pprs>'\
                     or aptag == '<pp><adv>' or aptag == '<pprs><adv>':
