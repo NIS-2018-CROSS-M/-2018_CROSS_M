@@ -1,10 +1,5 @@
-import os
-import re
-import argparse
-
-
 udtags = {
-
+    # bidirectional tags: fully compatible between UD and Apertium
     '<n>': 'NOUN',
     '<vblex>': 'VERB',
     '<adj>': 'ADJ',
@@ -12,7 +7,7 @@ udtags = {
     '<sint>': '',
     # <obj> and <subj> dropped
     '<obj>': '',
-    '<subj': '',
+    '<subj>': '',
     '<f>': 'Gender=Fem',
     '<m>': 'Gender=Masc',
     '<nt>': 'Gender=Neut',
@@ -61,26 +56,27 @@ udtags = {
     '<p1>': 'Person=1',
     '<p2>': 'Person=2',
     '<p3>': 'Person=3',
-    '<iv>': 'Valency=1',
-    '<tv>': 'Valency=2',
     '<neg>': 'Polarity=Neg',
     '<ma>': ('Gender=Masc', 'Animacy=Anim'),
     '<mi>': ('Gender=Masc', 'Animacy=Inan'),
     '<cpd>': 'Gender=Neut|Number=Sing|Polarity=Pos|Variant=Short|VerbForm=Part|Voice=Pass',
     '<sp>': 'Number=Sing,Plur',
     '<indecl>': 'Case=Indecl',
-    '<emph>': 'VerbType=Emph',
     '<lp>': 'VerbForm=Part',
     '<pii>': 'Tense=Imp',
-    '<ref>': 'Valency=Refl',  # which tagset to follow for this?
-    # check consistency with other tagsets (emphatic form of verb)
     #'<adv>+': 'Degree=Sup'
-
-
+    # unidirectional tags (not present in UD or used differently)
+    '<iv>': 'Valency=1',
+    '<tv>': 'Valency=2',
+    '<ref>': 'Valency=Refl',  # which tagset to follow for this?
+    '<emph>': 'VerbType=Emph',  # check consistency with other tagsets
+    '<fac>': 'VerbType=Fact', # don't add this one наверн, эта разметка на типы глагола есть только в Апертиуме
+    '<itg>': 'Type=Inter', # Possible for verbs as well as for adj and adv, check how to tag properly
+    '<cmp>': 'Degree=Com'
 }
 
 
-with open(r'E:\Lorenzo Tosi\OneDrive\Documenti\Program\NIS-FREQ\hrmorph.txt-yes-top10000', 'r', encoding='utf8') as f:
+with open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\rusmorph.txt-yes-top', 'r', encoding='utf8') as f:
     analyses = []
     for line in f:
         analyses.append(line.split()[1].strip('^$'))
@@ -100,22 +96,7 @@ with open(r'E:\Lorenzo Tosi\OneDrive\Documenti\Program\NIS-FREQ\hrmorph.txt-yes-
         '''
         todo:
         duplicate analyses
-        
-        rus: fac, cmp, dat? - поворот поворот NOUN Animacy=Inan|Case=Dat|Gender=Masc|Number=Sing
-        fac - >  ?????????
-        снялась	сняться	VERB	Aspect=Perf|Gender=Fem|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Mid
-        снялась	сняться	VERB	Aspect=Perf|Gender=Fem|Number=Sing<fac>|Tense=Past|Valency=1
-        снялся	сняться	VERB	Aspect=Perf|Gender=Masc|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Mid
-        снялся	сняться	VERB	Aspect=Perf|Gender=Masc|Number=Sing<fac>|Tense=Past|Valency=1
-        удалось	удаться	VERB	Aspect=Perf|Gender=Neut|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Mid
-        удалось	удаться	VERB	Aspect=Perf|Gender=Neut|Number=Sing<fac>|Tense=Past|Valency=1
-        прожил прожить Aspect=Perf|Gender=Masc|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Act
-        прожил	прожить	VERB	Aspect=Perf|Gender=Masc|Number=Sing<fac>|Tense=Past|Valency=1
-        пробыл	пробыть	VERB	Aspect=Perf|Gender=Masc|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Act
-        пробыл	пробыть	VERB	Aspect=Perf|Gender=Masc|Number=Sing<fac>|Tense=Past|Valency=1
-        перебрался	перебраться	VERB	_	Aspect=Perf|Gender=Masc|Mood=Ind|Number=Sing|Tense=Past|VerbForm=Fin|Voice=Mid
-        перебрался	перебраться	VERB	Aspect=Perf|Gender=Masc|Number=Sing<fac>|Tense=Past|Valency=1
-        
+        rus: dat? - поворот поворот NOUN Animacy=Inan|Case=Dat|Gender=Masc|Number=Sing
         ces: nej<adv>+ -> Degree=Sup - nej<adv>+vysoký -, ne<adv>+ -> Polarity=Neg
         discard <indecl>
         hr: ref, lp
@@ -130,17 +111,10 @@ with open(r'E:\Lorenzo Tosi\OneDrive\Documenti\Program\NIS-FREQ\hrmorph.txt-yes-
             gloss = '|'.join(sorted(gloss.split('|')[1:])).strip('|')
             # discard duplicated verb forms
             gloss = gloss.replace('VerbForm=Part|VerbForm=Vadv', '|' + 'VerbForm=Vadv')
-            if '<' in gloss:
-                print(surface_form, lemma_and_pos, gloss, sep='\t', file=open(r'E:\Lorenzo Tosi\OneDrive\Documenti\Program\NIS-FREQ\testfile.txt', 'a+', encoding='utf8'))
+            # if '<' in gloss:
+            print(surface_form, lemma_and_pos, gloss, sep='\t', file=open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\testfile.txt', 'a+', encoding='utf8'))
 
                
-            # 13 Apr 2019 
-#ADD:
-# for rus:
-    # <fac> = factual (vblex), (don't add this one наверн, эта разметка на типы глагола есть только в Апертиуме, нет в UD)
-    # <itg> = interrogative (vblex, adv, adj)
-    # cmp = Degree = Copm
-    
 # for hr: (croatian)
     # lp = ??
 # also .conllu files (in chat)    
