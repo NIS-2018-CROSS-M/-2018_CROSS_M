@@ -1,14 +1,9 @@
 file: belmorph.txt
-unknown tags:
-<cmp>
---
---
+DONE
 file: cesmorph.txt
 unknown tags:
 
 <tgv> = transgressive =  ‘Trans’ in (UD v1) and has been renamed ‘Conv’ (UD v2).
-
-<itg> = interrogative = Int (UD)
 
 <po> = ?? possessive? 
 --
@@ -22,8 +17,6 @@ unknown tags:
 <vbmod> = modal verb = не знаю как поделать в UD, у них много тегов для модальности (https://universaldependencies.org/u/feat/Mood.html)
 
 <ssup> = super-superlative = Abs (absolute superlative) (UD)
-
-<itg> = interrogative =  Int (UD)
 
 <mi>+pos
 
@@ -47,15 +40,11 @@ unknown tags:
 <nm>
 <dim>
 <cni>
-<itg>
 <po>
 <mp>
 --
 file: rusmorph.txt
-unknown tags:
-<cmp>
-<itg>
-<fac>
+DONE
 --
 file: slvmorph.txt
 unknown tags:
@@ -69,7 +58,6 @@ unknown tags:
 <f>+pos
 <vbmod>
 <ssup>
-<itg>
 <mi>+pos
 <clt>
 <ma>+pos
@@ -79,6 +67,5 @@ unknown tags:
 --
 file: ukrmorph.txt
 unknown tags:
-<itg>
 <nonpast>
 --
