@@ -14,17 +14,18 @@ unknown tags:
 
 <ssup> = super-superlative = Abs (absolute superlative) (UD)
 
-<mi>+pos
+NEW HERE 
+<mi>+pos = Masculine (inanimate)+ Posessive ADJ (расшифровка) = Gender=Masc, Animacy = Anim + ADJ Poss = Yes(UD)
 
-<clt>
+<clt> = Clitics (не нашла тега в UD) встречается как кластер <inf>+htjeti<vbmod><clt><futI>. Здесь конструкция хотеть+глагол, где клитик отвечает за окончание глагола “хотеть” (htjeti)
 
-<ma>+pos
+<ma>+pos = Masculine (animate)+ Posessive ADJ (расшифровка) = Gender=Masc, Animacy = Inan + ADJ Poss = Yes(UD)
 
-<futI>
+<futI> = Tense = Fut (UD)
 
-<nt>+pos
+<nt>+pos = neutral gender + possessive adj (встречается в цепочке <n><nt>+pos<adj>) = Gender=Neut, + ADJ Poss = Yes(UD)
 
-<imperf>
+<imperf> = выглядит как еще один вариант имперфекта, нашла несколько разметок апертиума, где этот тег был для имперфекта. Также нашла, что в Апертиуме фича imperfect это ‘pii’ и замаппен через UD как  Tense=Past Mood=Ind. Также в UD есть разметка Aspect = Imp. Что выбрать? Алсо, в хорватском imperfect расценивается как архаизм и стилистический маркер
 --
 file: mkdmorph.txt
 unknown tags:
