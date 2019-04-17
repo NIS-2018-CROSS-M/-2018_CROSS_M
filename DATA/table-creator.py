@@ -70,13 +70,15 @@ udtags = {
     '<tv>': 'Valency=2',
     '<ref>': 'Valency=Refl',  # which tagset to follow for this?
     '<emph>': 'VerbType=Emph',  # check consistency with other tagsets
-    '<fac>': 'VerbType=Fact', # don't add this one наверн, эта разметка на типы глагола есть только в Апертиуме
-    '<itg>': 'Type=Inter', # Possible for verbs as well as for adj and adv, check how to tag properly
-    '<cmp>': 'Degree=Com'
+    '<fac>': 'VerbType=Fact',  # don't add this one наверн, эта разметка на типы глагола есть только в Апертиуме
+    '<itg>': 'Type=Inter',  # Possible for verbs as well as for adj and adv, check how to tag properly
+    '<cmp>': 'Degree=Com',
+    '<prx>': 'Definite=Prx', # Proximal defined article, Macedonian (no UD model)
+    '<dst>': 'Definite=Dst', # Distal defined article, Macedonian (no UD model)
 }
 
 
-with open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\rusmorph.txt-yes-top', 'r', encoding='utf8') as f:
+with open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\mkdmorph.txt-yes-top', 'r', encoding='utf8') as f:
     analyses = []
     for line in f:
         analyses.append(line.split()[1].strip('^$'))
@@ -111,8 +113,8 @@ with open(r'D:\loren\OneDrive - НИУ Высшая школа экономик�
             gloss = '|'.join(sorted(gloss.split('|')[1:])).strip('|')
             # discard duplicated verb forms
             gloss = gloss.replace('VerbForm=Part|VerbForm=Vadv', '|' + 'VerbForm=Vadv')
-            # if '<' in gloss:
-            print(surface_form, lemma_and_pos, gloss, sep='\t', file=open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\testfile.txt', 'a+', encoding='utf8'))
+            if '<' in gloss:
+                print(surface_form, lemma_and_pos, gloss, sep='\t', file=open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\testfile.txt', 'a+', encoding='utf8'))
 
                
 # for hr: (croatian)

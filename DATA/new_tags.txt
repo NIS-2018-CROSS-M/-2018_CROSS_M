@@ -32,8 +32,7 @@ unknown tags:
 --
 file: mkdmorph.txt
 unknown tags:
-<prx>
-<dst>
+DONE
 --
 file: polmorph.txt
 unknown tags:
