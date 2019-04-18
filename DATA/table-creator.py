@@ -34,6 +34,10 @@ udtags = {
     '<voc>': 'Case=Voc',
     '<perf>': 'Aspect=Perf',
     '<impf>': 'Aspect=Imp',
+    '<imperf>': 'Aspect=Imp',  # Croatian, archaic imperfect aspect form (Lorenzo). выглядит как еще один вариант
+    # имперфекта, нашла несколько разметок апертиума, где этот тег был для имперфекта. Также нашла, что в Апертиуме
+    # фича imperfect это ‘pii’ и замаппен через UD как  Tense=Past Mood=Ind. Также в UD есть разметка Aspect = Imp.
+    # Что выбрать? Алсо, в хорватском imperfect расценивается как архаизм и стилистический маркер (Nastya)
     '<dual>': 'Aspect=Imp,Perf',
     '<pres>': 'Tense=Pres',
     '<past>': 'Tense=Past',
@@ -64,8 +68,11 @@ udtags = {
     '<sp>': 'Number=Sing,Plur',
     '<indecl>': 'Case=Indecl',
     '<lp>': 'VerbForm=Part',
-    '<pii>': 'Tense=Imp',
+    '<pii>': 'Tense=Imp', # Bulgarian and Croatian, following UD tagset as per their website
+    '<ssup>': 'Degree=Abs',
+    '<futI>': 'Tense=Fut', #serbo-croatian, 2 futures (I and II), UD does not distinguish
     #'<adv>+': 'Degree=Sup'
+
     # unidirectional tags (not present in UD or used differently)
     '<iv>': 'Valency=1',
     '<tv>': 'Valency=2',
@@ -76,11 +83,16 @@ udtags = {
     '<cmp>': 'Degree=Com',
     '<prx>': 'Definite=Prx',  # Proximal defined article, Macedonian (no UD model)
     '<dst>': 'Definite=Dst',  # Distal defined article, Macedonian (no UD model)
-    '<adj><po>': 'ADV'  # Czech, chorvatsky = по-хорватски, it is an "adverbiated adjective"
+    '<adj><po>': 'ADV',  # Czech, chorvatsky = по-хорватски, it is an "adverbiated adjective"
+    '+htjeti': '', # Croatian, всегда ходят такой цепочкой: <inf>+htjeti<vbmod>. Excluding modal as it concurs to form a regular future form. встречается как кластер <inf>+htjeti<vbmod><clt><futI>. Здесь конструкция хотеть+глагол, где клитик отвечает за окончание глагола “хотеть” (htjeti)
+    '<vbmod>': '', # Excluding modal as it is a closed class, only in readings like htjeti or moguci (serbian), where it is an adverbial derived form
+    '<clt>': '', # clitics, same reason as per '+htjeti', could be used to mark the "reduced" form of FutI in serbo-croatian if we want to mark it (brace vs. brat ce (more common))
+    '<nt>+pos<adj>': 'Poss=Yes' # same reason as htjeti, used to build possessive constructions for name (similar to russian мамина комната)
+
 }
 
 
-with open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\cesmorph.txt-yes-top', 'r', encoding='utf8') as f:
+with open(r'E:\Lorenzo Tosi\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\hrmorph.txt-yes-top', 'r', encoding='utf8') as f:
     analyses = []
     for line in f:
         analyses.append(line.split()[1].strip('^$'))
@@ -103,7 +115,6 @@ with open(r'D:\loren\OneDrive - НИУ Высшая школа экономик�
         rus: dat? - поворот поворот NOUN Animacy=Inan|Case=Dat|Gender=Masc|Number=Sing
         ces: nej<adv>+ -> Degree=Sup - nej<adv>+vysoký -, ne<adv>+ -> Polarity=Neg
         discard <indecl>
-        hr: ref, lp
         '''
 
         surface_form = analysis.split('/')[0]
@@ -115,8 +126,8 @@ with open(r'D:\loren\OneDrive - НИУ Высшая школа экономик�
             gloss = '|'.join(sorted(gloss.split('|')[1:])).strip('|')
             # discard duplicated verb forms
             gloss = gloss.replace('VerbForm=Part|VerbForm=Vadv', '|' + 'VerbForm=Vadv')
-            if '<' in gloss:
-                print(surface_form, lemma_and_pos, gloss, sep='\t', file=open(r'D:\loren\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\testfile.txt', 'a+', encoding='utf8'))
+            # if '<' in gloss:
+            print(surface_form, lemma_and_pos, gloss, sep='\t', file=open(r'E:\Lorenzo Tosi\OneDrive - НИУ Высшая школа экономики\Documenti\Program\NIS-FREQ\frequency\testfile.txt', 'a+', encoding='utf8'))
 
                
 # for hr: (croatian)

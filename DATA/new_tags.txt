@@ -6,26 +6,13 @@ DONE
 file: hrmorph.txt
 unknown tags:
 
-<inf>+htjeti - всегда ходят такой цепочкой: <inf>+htjeti<vbmod>. htjeti - from Proto-Slavic *xъtěti, cognate with Russian хотеть (xotetʹ), Ukrainian хотіти (xotity). Здесь выражение “хотеть+инфинитив” и хотеть рассматривается как модальный 
+<f>+pos ??? встречается в комбинации <n><f>+pos<adj> - вероятно это: сущ.женского рода + притяжательное прилагательное
 
-<f>+pos ??? встречается в комбинации <n><f>+pos<adj> - вероятно это: сущ.женского рода + притяжательное прилагательное 
- 
-<vbmod> = modal verb = не знаю как поделать в UD, у них много тегов для модальности (https://universaldependencies.org/u/feat/Mood.html)
-
-<ssup> = super-superlative = Abs (absolute superlative) (UD)
-
-NEW HERE 
 <mi>+pos = Masculine (inanimate)+ Posessive ADJ (расшифровка) = Gender=Masc, Animacy = Anim + ADJ Poss = Yes(UD)
-
-<clt> = Clitics (не нашла тега в UD) встречается как кластер <inf>+htjeti<vbmod><clt><futI>. Здесь конструкция хотеть+глагол, где клитик отвечает за окончание глагола “хотеть” (htjeti)
 
 <ma>+pos = Masculine (animate)+ Posessive ADJ (расшифровка) = Gender=Masc, Animacy = Inan + ADJ Poss = Yes(UD)
 
-<futI> = Tense = Fut (UD)
-
 <nt>+pos = neutral gender + possessive adj (встречается в цепочке <n><nt>+pos<adj>) = Gender=Neut, + ADJ Poss = Yes(UD)
-
-<imperf> = выглядит как еще один вариант имперфекта, нашла несколько разметок апертиума, где этот тег был для имперфекта. Также нашла, что в Апертиуме фича imperfect это ‘pii’ и замаппен через UD как  Tense=Past Mood=Ind. Также в UD есть разметка Aspect = Imp. Что выбрать? Алсо, в хорватском imperfect расценивается как архаизм и стилистический маркер
 --
 file: mkdmorph.txt
 unknown tags:
@@ -36,7 +23,6 @@ unknown tags:
 <nm>
 <dim>
 <cni>
-<po>
 <mp>
 --
 file: rusmorph.txt
@@ -49,17 +35,7 @@ unknown tags:
 <imperf>
 --
 file: srmorph.txt
-unknown tags:
-<inf>+htjeti
-<f>+pos
-<vbmod>
-<ssup>
-<mi>+pos
-<clt>
-<ma>+pos
-<futI>
-<nt>+pos
-<imperf>
+SEE hrmorph.txt, the tagset issues are identical.
 --
 file: ukrmorph.txt
 unknown tags:
