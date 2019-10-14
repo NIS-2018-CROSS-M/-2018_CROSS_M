@@ -1,6 +1,5 @@
 #%% [markdown]
 #  #### set up telegram notifications
-#
 #  не очень понятно, нужно ли это.
 #
 #  если нужно -- напишите @oserikov в телеграме, я расскажу, что сделать,
@@ -15,7 +14,7 @@ if telegram_notifications_enabled:
     chat_id = "292749902" # for @oserikov
 
 #%% [markdown]
-#  #### install prereqs
+# #### install prereqs
 
 #%%
 get_ipython().system(f"git clone https://github.com/NIS-2018-CROSS-M/colab-tools.git")
@@ -41,6 +40,9 @@ get_ipython().magic('cd ..')
 
 
 #%%
+from collections import defaultdict as dd
+from random import shuffle
+import re
 import sys
 sys.path.append(get_ipython().getoutput("readlink -e calma_tools")[0])
 from calma_tools.ml_util import MLUtil
@@ -105,7 +107,7 @@ class NBestDataModifyer:
     @staticmethod
     def sent_to_baseline_compatible(line):
         return line
-
+      
     @staticmethod
     def hyp_to_baseline_compatible(line):
         line_splitted = line.split('] [')
@@ -116,8 +118,8 @@ class NBestDataModifyer:
 
 
 class DataEvaluator:
-    otypes = ["morph analysis"]
-
+    otypes = ["analysis","lemma","tag"]
+    
     @staticmethod
     def update_data(data, line):
         lan, wf, lemma, pos, msd = line.split('\t')
@@ -128,6 +130,60 @@ class DataEvaluator:
 
 #%% [markdown]
 #  #### ml
+
+#%%
+class CognatesTool:
+    words_info = {}
+
+    def __init__(self, ud_data_filenames):
+        for fn in ud_data_filenames:
+            with open(fn, 'r', encoding="utf-8") as f:
+                for line in f:
+                    lang, wf, lemma, pos, morph_a = line.rstrip().split('\t')
+                    if wf not in self.words_info.keys():
+                        self.words_info[wf] = []
+                    
+                    self.words_info[wf].append(
+                        {
+                            "lang": lang,
+                            "wf": wf,
+                            "lemma": lemma,
+                            "pos": pos,
+                            "morph_a": morph_a
+                        }
+                    )
+        print(str(len(self.words_info.keys())) + " words have cognates")
+
+    def get_words(self):
+        return self.words_info.keys()
+
+    def word_has_cognates(self, word):
+        return word in self.get_words()
+
+    def has_cognates(self, line, onmt_style=False):
+        if onmt_style:
+            res = self.word_has_cognates(''.join(line.rstrip().split()))
+        else:
+            # ud style lang \t wordform \t lemma \t pos \t analyses \t i want to sleeeeep
+            res = self.word_has_cognates(line.rstrip().split('\t')[1])
+        return res
+
+    def predict(self, src_filename, output_filename):
+        with open(src_filename, 'r', encoding="utf-8") as f_src,             open(output_filename, 'w', encoding="utf-8") as f_tgt:
+            
+            for line in f_src:
+                lang, wf, lemma, pos, morph_a = line.rstrip().split('\t')
+                
+                if wf not in self.get_words():
+                    continue                
+                
+                for analysis_set in self.words_info[wf]:
+                    print('\t'.join([analysis_set["lang"],
+                                     analysis_set["wf"],
+                                     analysis_set["lemma"],
+                                     analysis_set["pos"],
+                                     analysis_set["morph_a"]]),
+                          file=f_tgt)
 
 
 #%%
