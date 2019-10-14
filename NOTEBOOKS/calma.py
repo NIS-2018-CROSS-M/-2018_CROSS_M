@@ -1,14 +1,14 @@
 #%% [markdown]
 #  #### set up telegram notifications
-# 
+#
 #  не очень понятно, нужно ли это.
-# 
+#
 #  если нужно -- напишите @oserikov в телеграме, я расскажу, что сделать,
 #  чтобы присылались сообщения с качеством модели когда она отработает.
 
 #%%
 telegram_notifications_enabled=False
-EXP_DESCRIPTION = "BASELINE"
+EXP_DESCRIPTION = "PREDICT ONLY MORPHOLOGICAL ANALYSIS"
 
 if telegram_notifications_enabled:
     bot_token = input("введите telegram bot token: ")
@@ -94,8 +94,7 @@ class TrainDataModifyer:
 
     @staticmethod
     def modify_tgt_line(line):
-        return line
-
+        return ' '.join(['+' + tag for tag in line.split('+') if '=' in tag and not tag.startswith("Language=")]).rstrip(' ')
 
     @staticmethod
     def restore_tgt_line(line):
@@ -106,22 +105,24 @@ class NBestDataModifyer:
     @staticmethod
     def sent_to_baseline_compatible(line):
         return line
-                       
+
     @staticmethod
     def hyp_to_baseline_compatible(line):
-        return line
+        line_splitted = line.split('] [')
+        line_splitted[1] = line_splitted[1].rstrip(']')  # (line_splitted[1].split(']')[0])
+        if len(line_splitted) < 2 or line_splitted[1] == "":
+            line_splitted[1] = '\'+Tag0=?\''
+        return line_splitted[0] + '] [' + ', '.join(['\'c\'', '\'c\'', '\'+NOUN\'', line_splitted[1], '\'+Language=lan\'']) + ']'
 
-    
+
 class DataEvaluator:
-    otypes = ["analysis","lemma","tag"]
-    
+    otypes = ["morph analysis"]
+
     @staticmethod
     def update_data(data, line):
         lan, wf, lemma, pos, msd = line.split('\t')
-        
-        data["analysis"][wf].add((lemma,pos,msd))
-        data["lemma"][wf].add(lemma)
-        data["tag"][wf].add((pos,msd))
+
+        data["morph analysis"][wf].add(msd)
         
         return data
 
