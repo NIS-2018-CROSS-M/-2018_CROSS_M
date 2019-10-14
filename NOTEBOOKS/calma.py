@@ -1,6 +1,5 @@
 #%% [markdown]
 #  #### set up telegram notifications
-# 
 #  не очень понятно, нужно ли это.
 #
 #  если нужно -- напишите @oserikov в телеграме, я расскажу, что сделать,
@@ -8,7 +7,7 @@
 
 #%%
 telegram_notifications_enabled=False
-EXP_DESCRIPTION = "BASELINE"
+EXP_DESCRIPTION = "PREDICT ONLY MORPHOLOGICAL ANALYSIS"
 
 if telegram_notifications_enabled:
     bot_token = input("введите telegram bot token: ")
@@ -97,8 +96,7 @@ class TrainDataModifyer:
 
     @staticmethod
     def modify_tgt_line(line):
-        return line
-
+        return ' '.join(['+' + tag for tag in line.split('+') if '=' in tag and not tag.startswith("Language=")]).rstrip(' ')
 
     @staticmethod
     def restore_tgt_line(line):
@@ -109,22 +107,24 @@ class NBestDataModifyer:
     @staticmethod
     def sent_to_baseline_compatible(line):
         return line
-                       
+      
     @staticmethod
     def hyp_to_baseline_compatible(line):
-        return line
+        line_splitted = line.split('] [')
+        line_splitted[1] = line_splitted[1].rstrip(']')  # (line_splitted[1].split(']')[0])
+        if len(line_splitted) < 2 or line_splitted[1] == "":
+            line_splitted[1] = '\'+Tag0=?\''
+        return line_splitted[0] + '] [' + ', '.join(['\'c\'', '\'c\'', '\'+NOUN\'', line_splitted[1], '\'+Language=lan\'']) + ']'
 
-    
+
 class DataEvaluator:
     otypes = ["analysis","lemma","tag"]
     
     @staticmethod
     def update_data(data, line):
         lan, wf, lemma, pos, msd = line.split('\t')
-        
-        data["analysis"][wf].add((lemma,pos,msd))
-        data["lemma"][wf].add(lemma)
-        data["tag"][wf].add((pos,msd))
+
+        data["morph analysis"][wf].add(msd)
         
         return data
 
@@ -232,32 +232,9 @@ def ml(langs, tracks, train_params, prediction_params, dataModifyer, nbestModify
 
 
             # ml| predict and eval for val
-            
-            # cognates heuristic: use ml for val data non having cognates, copy analysis of cognates
-            cognates_tool = CognatesTool([train_uncovered_filename])
-            # split the val data onto cognates-having(below) and cognates non-having
-            val_res_src_for_ml_filename = val_res_src_filename+"for_ml"
-            val_res_src_for_cognates_filename = val_res_src_filename+"for_cognates"
-            with open(val_res_src_filename, 'r', encoding="utf-8") as f,                 open(val_res_src_for_ml_filename, 'w', encoding="utf-8") as f_ml,                 open(val_res_src_for_cognates_filename, 'w', encoding="utf-8") as f_cog:
-                for line in f:
-                    print(line.rstrip(), file=f_cog if cognates_tool.has_cognates(line, onmt_style=True) else f_ml)
-            # split the val data onto cognates-having and cognates non-having (below)
-            val_covered_for_ml_filename = val_covered_filename+"for_ml"
-            val_covered_for_cognates_filename = val_covered_filename+"for_cognates"
-            with open(val_covered_filename, 'r', encoding="utf-8") as f,                 open(val_covered_for_ml_filename, 'w', encoding="utf-8") as f_ml,                 open(val_covered_for_cognates_filename, 'w', encoding="utf-8") as f_cog:
-                for line in f:
-                    print(line.rstrip(), file=f_cog if cognates_tool.has_cognates(line) else f_ml)
+            mlUtil.predict(model_filename, val_res_src_filename, val_covered_filename, val_pred_output_filename)
 
-            # predict analysis for cognates non-having, copy analysis from cognates for cognates-having
-            val_pred_for_ml_output_filename = val_pred_output_filename+"for_ml"
-            val_pred_for_cognates_output_filename = val_pred_output_filename+"for_cognates"
-            
-            mlUtil.predict(model_filename, val_res_src_for_ml_filename, val_covered_for_ml_filename, val_pred_for_ml_output_filename)
-            cognates_tool.predict(val_covered_for_cognates_filename, val_pred_for_cognates_output_filename)
-            
-            # merge prediction of both approaches
-            get_ipython().system(f'cat {val_pred_for_ml_output_filename} >> {val_pred_output_filename} '                                  + '&& '                                  + f'cat {val_pred_for_cognates_output_filename} >> {val_pred_output_filename}')
-            
+
             get_ipython().system(f'echo "*===QUALITY ON VAL DATA===*" >> {score_log_filename}')
             mlUtil.score_predictions(val_pred_output_filename, val_uncovered_filename, score_log_filename, dataEvaluator)
 
