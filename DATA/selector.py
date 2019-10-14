@@ -7,13 +7,13 @@ import argparse
 # This program automatically split the frequency files in three lists:
 # "no" list - made from words that apertium could not analyze,
 # "yes" list - made from words that apertium could analyze,
-# "10000" list - made from the 10000 most frequent words, that are part of an open morphological class (adj, vblex, n)
+# "top" list - made from the words, that are part of an open morphological class (adj, vblex, n)
 
 
 # oleg@DESKTOP-8LKO59R:/mnt/c/Users/olegs/cross-lingual-morph-analysis$ python DATA/selector.py --help
 # usage: selector.py [-h] [-d D | -f FILES [FILES ...]]
 #
-# Extract top 10000 morphologically analyzed word_forms from the frequency \t
+# Extract morphologically analyzed open-class word_forms from the frequency \t
 # apertium-analysis files. If no arguments provided will try to process all the
 # files in the current directory
 #
@@ -34,6 +34,8 @@ def process_frequency_files(freq_filenames):
                 for line in freq_f:
                     if "<" not in line and ">" not in line:
                         words_not_analyzed_by_apertium.append(line)
+                    elif re.search('[0-9]+ [^\\^]', line) or re.search('\\$.+$', line) is not None:
+                        words_not_analyzed_by_apertium.append(line)
                     else:
                         words_analyzed_by_apertium.append(line)
         except Exception as e:
@@ -53,7 +55,7 @@ def process_frequency_files(freq_filenames):
     return analyzed_lines_filenames, not_analyzed_lines_filenames
 
 
-def get_interesting_analyses_from_word_form_analysis_line(line, interesting_classes=("<n>", "<vblex>", "<adj>")):
+def get_interesting_analyses_from_word_form_analysis_line(line, interesting_classes=("<n>", "<vblex>", "<adj>", "<adv>")):
     line_as_list = line.split("/")
     word_form = line_as_list[0]
     analyses = line_as_list[1:]
@@ -70,7 +72,7 @@ def get_interesting_analyses_from_word_form_analysis_line(line, interesting_clas
     return word_form, interesting_analyses
 
 
-def get_n_highest_freq_lines(analyzed_word_forms_filenames, top_n_number=10000):
+def get_n_highest_freq_lines(analyzed_word_forms_filenames):
     for filename in analyzed_word_forms_filenames:
         with open(filename, "r", encoding="utf-8") as freq_f:
             output_lines = []
@@ -80,9 +82,9 @@ def get_n_highest_freq_lines(analyzed_word_forms_filenames, top_n_number=10000):
                 if interesting_analyses:
                     output_lines.append(word_form + "/" + "/".join(interesting_analyses))
 
-            output_filename = filename + "-top" + str(top_n_number)
+            output_filename = filename + "-top"
             with open(output_filename, "w+", encoding="utf-8") as output_file:
-                output_file.write("".join(output_lines[:top_n_number]))
+                output_file.write("".join(output_lines))
 
 
 def process_files(filenames):
