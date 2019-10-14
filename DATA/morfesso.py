@@ -58,4 +58,3 @@ if __name__ == "__main__":
     data_prepare(datapath)
     da_trainer(datapath + ".corpus")
     test_data(modelpath, testpath)
-
