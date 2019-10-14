@@ -2,7 +2,7 @@
 
 ### Cross-lingual morphological analysis
 
-* Morphology model of an unseen Slavic language X with annotated data on N related languages given
+* Morphology model of an unseen Turkic/Romance language X with annotated data on N related languages given
 * Without annotated data for language X used
 
 ### Mentors
