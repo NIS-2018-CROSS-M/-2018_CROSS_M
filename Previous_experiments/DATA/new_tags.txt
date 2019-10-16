@@ -1,0 +1,44 @@
+file: belmorph.txt
+DONE
+file: cesmorph.txt
+DONE
+--
+file: hrmorph.txt
+unknown tags:
+
+<f>+pos ??? встречается в комбинации <n><f>+pos<adj> - вероятно это: сущ.женского рода + притяжательное прилагательное
+
+<mi>+pos = Masculine (inanimate)+ Posessive ADJ (расшифровка) = Gender=Masc, Animacy = Anim + ADJ Poss = Yes(UD)
+
+<ma>+pos = Masculine (animate)+ Posessive ADJ (расшифровка) = Gender=Masc, Animacy = Inan + ADJ Poss = Yes(UD)
+
+<nt>+pos = neutral gender + possessive adj (встречается в цепочке <n><nt>+pos<adj>) = Gender=Neut, + ADJ Poss = Yes(UD)
+--
+file: mkdmorph.txt
+unknown tags:
+DONE
+--
+file: polmorph.txt
+unknown tags:
+<nm> = Not-masculine personal (gender) = oops UD guys don't have this tag
+<dim> = diminitive = tag is absent in UD again( 
+<cni> = Conditionam = (UD) 	Mood=Cnd
+<mp> = 	Masculine personal (esp. in Polish) = (UD) Gender=Masc
+--
+file: rusmorph.txt
+DONE
+--
+file: slvmorph.txt
+unknown tags:
+<ela> - я пока не поняла, что это, но этот тег есть у ADJ (<adj><ela> - premalo, prehudo, prehitro ) , которые образованы от ADV, оттуда они тащат этот тег)  ADV(<adv><sint><ela> - malo, hudo, hitro ). У всех ADJ с этим тегом есть префикс -pre- . Сокращение похоже на элатив, (и некоторые разметки Апертиума говорят, что это сокращение для элатива, но я не уверена. Выглядит, что в словенском нет элатива, плюс, его нет у этих прилагательных.) 
+
+<supn>  = Supine = (UD) VerbForm=Sup
+<imperf> = mostly occurs in a sequence <vblex><imperf><supn> = это несовершенный вид (широко распространен в отличие от хорватского). Запишем как pii или как в hrmorph ?
+--
+file: srmorph.txt
+SEE hrmorph.txt, the tagset issues are identical.
+--
+file: ukrmorph.txt
+unknown tags:
+<nonpast> - occurs in seq <vblex><dual>(here either <tv> or <iv>)<nonpast>, но дальше не нашла ничего хорошего(
+--

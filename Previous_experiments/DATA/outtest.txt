@@ -1,0 +1,4 @@
+организовал	организовать	VERB	Aspect=Imp|Gender=Masc|Number=Sing|Tense=Past|Valency=2
+организовал	организовать	VERB	Aspect=Perf|Gender=Masc|Number=Sing|Tense=Past|Valency=1
+организовал	организовать	VERB	Aspect=Perf|Gender=Masc|Number=Sing|Tense=Past|Valency=2
+организовал	организовать	VERB	Aspect=Imp|Gender=Masc|Number=Sing<fac>|Tense=Past|Valency=1
