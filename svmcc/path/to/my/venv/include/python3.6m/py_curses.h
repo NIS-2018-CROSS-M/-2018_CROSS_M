@@ -1,1 +1,0 @@
-/Users/vladternovskij/anaconda3/include/python3.6m/py_curses.h
