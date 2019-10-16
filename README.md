@@ -9,9 +9,13 @@
 
 * Francis Tyers
 
-### Team
+### Current Team
 
 * Nastya Khorosheva
-* Oleg Serikov
 * Lorenzo Tosi
+* Vladimir Vlasov
+
+### Former Developers
+
+* Oleg Serikov
 * Vlad Mikhailov
