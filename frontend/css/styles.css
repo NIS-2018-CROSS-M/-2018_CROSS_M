@@ -1,0 +1,10 @@
+button {margin: 10px;}
+.big-button {width: 200px;}
+p {font-size: large;}
+.text-bread {text-decoration: underline; cursor: pointer;}
+.text-active {color: red; font-weight: bolder;}
+@media (min-height: 650px) and (min-width: 650px) {
+    /* For desktop: */
+    footer {position: absolute;
+    bottom: 0px;
+    width: 100%;}}
