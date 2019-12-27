@@ -85,7 +85,7 @@
 
 <div id="content" class="container-fluid" role="main">
     <br>
-    <p class="text-center">Thank you for using our Toolkit! Your corpus will be downloaded as soon as it is ready.</p>
+    <p class="text-center" id="testcontent">Thank you for using our Toolkit! Your corpus will be downloaded as soon as it is ready.</p>
     <br>
     <div class="col-6 offset-3">
         <img src="img/cat-gif-loop-circle.gif" class="img-fluid">
@@ -105,5 +105,6 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/480cf8c6f9.js" crossorigin="anonymous"></script>
+<script>$("Document").ready(function(){$.ajax({url: 'http://httpbin.org/ip', processData: false, contentType: false,  type:'get', success: function(result){console.log(result)}})});</script>
 </body>
 </html>
