@@ -90,6 +90,7 @@
     <div class="col-6 offset-3">
         <img src="img/cat-gif-loop-circle.gif" class="img-fluid">
     </div>
+    <a id="target" style="display: none"></a>
 </div>
 
 <footer class="card-footer">
@@ -105,6 +106,53 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/480cf8c6f9.js" crossorigin="anonymous"></script>
-<script>$("Document").ready(function(){$.ajax({url: 'http://httpbin.org/ip', processData: false, contentType: false,  type:'get', success: function(result){console.log(result)}})});</script>
+<script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+    $("Document").ready(function(){
+        result_fn = getUrlParameter("result_fn");
+        downloaded = false;
+        check_if_need_to_dld = setInterval(function () {
+            if (downloaded) {return}
+            else {
+                $.ajax({
+                    url: 'http://anonymos.pythonanywhere.com/is_done?result_fn='+result_fn,
+                    type: 'get',
+                    processData: false,
+                    contentType: false,
+                    crossDomain: true,
+                    // headers: {  'Access-Control-Allow-Origin': '*' },
+                    success: function (result) {
+                        var json = $.parseJSON(JSON.stringify(result));
+                        is_done = json.done;
+                        if (is_done) {
+                            console.log("file is ready to be downloaded" + is_done.toString())
+                            var el = document.getElementById("target");
+                            el.href = 'http://anonymos.pythonanywhere.com/download?result_fn=' + result_fn;
+                            el.style.visibility = "visible";
+                            el.download = "result";
+                            el.click();
+                            clearInterval(check_if_need_to_dld);
+                        }
+                    },
+                    error: function (result) {
+                        alert("Error! File not uploaded.")
+                    }
+                })
+            }
+        }, 1);
+    });</script>
 </body>
 </html>

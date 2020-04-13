@@ -122,8 +122,42 @@
 <script>
     var formData = new FormData();
     var $inp = $(".input-group-text");
-    $inp.click(function (){formData.append('file', $('#FileTran')[0].files[0])});
-    $inp.click(function(){$.ajax({url: '/jquery/submitData', data:formData, processData: false, contentType: false,  type:'post', success: function(result){alert(result)}})});
-    $inp.click(function(){window.location.href='s3_cor.html'})</script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    };
+    $inp.click(function () {
+        formData.append('file', $('#FileTran')[0].files[0])
+    });
+    $inp.click(function () {
+        $.ajax({
+            url: 'http://anonymos.pythonanywhere.com/upload_translit_table',
+            data:formData, type: 'post',
+            processData: false,
+            contentType: false,
+            crossDomain: true,
+            // headers: {  'Access-Control-Allow-Origin': '*' },
+            success: function (result) {
+                var json = $.parseJSON(JSON.stringify(result));
+                console.log(json);
+                saved_fn = json.saved;
+                window.location.href = 's3_rom_cor.html?saved_trans_fn='+saved_fn.toString()+'&lang=rom'
+            },
+            error: function (result) {
+                alert("Error! File not uploaded.")
+            }
+        })
+    });
+</script>
 </body>
 </html>
