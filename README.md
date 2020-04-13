@@ -1,6 +1,6 @@
 # NIS-2018_CROSS_M
 
-## [>>> !!! PLEASE DON'T GO THERE !!! <<<](https://nis-2018-cross-m.github.io/cross-lingual-morph-analysis/frontend)
+## [our testbed site](https://nis-2018-cross-m.github.io/cross-lingual-morph-analysis/frontend)
 
 ### Cross-lingual morphological analysis
 
@@ -13,7 +13,7 @@
 
 ### Current Team
 
-* Nastya Khorosheva
+* Anastasia Khorosheva
 * Lorenzo Tosi
 * Vladimir Vlasov
 
