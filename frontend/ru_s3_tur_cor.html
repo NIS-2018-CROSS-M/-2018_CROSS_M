@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cross-Language Morphology Toolkit</title>
+    <title>Портал кросс-языковой морфологии</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Social Buttons CSS -->
@@ -20,13 +20,13 @@
 <div class="text-center" id="nav_bar">
     <nav class="navbar nav-pills bg-dark">
         <div class="col-7">
-            <h2 style="color: lightgray">Cross-Language Morphology Toolkit</h2>
+            <h2 style="color: lightgray">Портал кросс-языковой морфологии</h2>
         </div>
         <div class="col-4">
             <form class="form-inline float-right">
-                <button class="btn bg-light" type="button" id="aboutus" data-toggle="modal" data-target="#aboutmodal">About Us</button>
-                <button class="btn btn-social bg-light" type="button" id="github" data-toggle="modal" data-target="#githubmodal"><i class="fab fa-github"></i>Repository</button>
-                <button type="button" class="btn btn-secondary" onclick="window.location.href='ru_s3_rom_cor.html'">Rus </button>
+                <button class="btn bg-light" type="button" id="aboutus" data-toggle="modal" data-target="#aboutmodal">О нас</button>
+                <button class="btn btn-social bg-light" type="button" id="github" data-toggle="modal" data-target="#githubmodal"><i class="fab fa-github"></i>Манускрипты</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='s3_tur_cor.html'">Eng </button>
             </form>
         </div>
     </nav>
@@ -37,13 +37,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">About Us</h5>
+        <h5 class="modal-title">О нас</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p style="text-justify: distribute-all-lines">Welcome from the cross-lingual-morpho-analysis Team!<br>  We are 3 (previously 5) students from NRU-HSE, our names are Lorenzo Tosi, Vladimir Vlasov and Anastasia Khorosheva. <br> We developed the algorithm that produces lemma, part-of-speech tag and morphosyntactic annotations for words in a given language. It is based on annotated data of languages coming from the same family (e.g. Sardinian and Italian). <br> The full algorithm is explained in our <a href="https://www.aclweb.org/anthology/W19-1415.pdf"> paper</a> from the VarDial 2019 competition.</p>
+        <p style="text-justify: distribute-all-lines">Привет от команды исследователей кросс-языковой морфологии!<br>  Мы - 3 (в прошлом 5) студента из НИУ ВШЭ, нас зовут Лоренцо Този, Владимир Власов и Анастасия Хорошева. <br> Мы разработали алгоритм, который производит леммы, тег части речи и морфосинтаксическую разметку для слов в заданном языке. Алгоритм опирается на размеченные данные на языках, родственных для заданного (например, как итальянский для сардинского). <br> Полное объяснение работы алгоритма можно прочитать в нашей <a href="https://www.aclweb.org/anthology/W19-1415.pdf"> статье</a>, написанной по итогам соревнования VarDial, прошедшего в 2019 году.</p>
       </div>
     </div>
   </div>
@@ -53,17 +53,17 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">You are leaving the site</h5>
+        <h5 class="modal-title">Вы покидаете портал</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to leave the site?</p>
+        <p>Вы уверены, что хотите покинуть портал?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="window.location.href='https://github.com/NIS-2018-CROSS-M/cross-lingual-morph-analysis'">Confirm</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='https://github.com/NIS-2018-CROSS-M/cross-lingual-morph-analysis'">К манускриптам!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Я случайно</button>
       </div>
     </div>
   </div>
@@ -73,34 +73,33 @@
 <div id="breadcrumb">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item text-bread" onclick="window.location.href='index.html'">Home</li>
-            <li class="breadcrumb-item text-bread" onclick="window.location.href='s1_fam.html'">Language Family</li>
+            <li class="breadcrumb-item text-bread" onclick="window.location.href='ru_index.html'">Главный зал</li>
+            <li class="breadcrumb-item text-bread" onclick="window.location.href='ru_s1_fam.html'">Языковая семья</li>
             <li class="breadcrumb-item text-bread"
-                onclick="window.location.href='s2_' + sessionStorage.getItem('lan_fam') + '.html'">Transliteration
+                onclick="window.location.href='ru_s2_' + sessionStorage.getItem('lan_fam') + '.html'">Транслитерация
             </li>
-            <li class="breadcrumb-item text-active" aria-current="page">Corpus Loading</li>
+            <li class="breadcrumb-item text-active" aria-current="page">Загрузка корпуса</li>
         </ol>
     </nav>
 </div>
 
 <div id="content" class="container-fluid" role="main">
     <br>
-    <p class="text-center">Load your corpus file! The file should be in .txt
-        format and contain the texts from your target language.<br> The texts don't need to be pre-processed before loading.</p>
+    <p class="text-center">Загрузите Ваш корпус! Файл должен быть в формате .txt и содержать тексты на заданном языке.<br> Предобработка текстов не требуется.</p>
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="btn input-group-text">Upload</span>
+            <span class="btn input-group-text">Загрузить</span>
         </div>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="FileCor">
-            <label class="custom-file-label" for="FileCor">Choose file</label>
+            <label class="custom-file-label" for="FileCor">Выбрать файл</label>
         </div>
     </div>
 </div>
 
 <footer class="card-footer">
-<div class="text-center">2019 || Higher School of Economics - Faculty of Linguistics
+<div class="text-center">2019 || Высшая Школа Экономики - ФГН - школа лингвистики
 </div>
 </footer>
 
@@ -114,6 +113,7 @@
 <!-- Send api and change page -->
 <script>
     var formData = new FormData();
+
     var $inp = $(".input-group-text");
     var getUrlParameter = function getUrlParameter(sParam) {
         var sPageURL = window.location.search.substring(1),
@@ -146,18 +146,14 @@
                 var json = $.parseJSON(JSON.stringify(result));
                 console.log(json);
                 saved_data_fn = json.saved;
-                window.location.href = 's4_end.html?saved_data_fn='+saved_data_fn.toString()+
-                    'saved_trans_fn='+saved_trans_fn+
-                    '&lang=rom'
+                result_fn = json.result;
+                window.location.href = 'ru_s4_end.html?result_fn='+result_fn.toString()
             },
             error: function (result) {
-                alert("Error! File not uploaded :(")
+                alert("Ошибка загрузки файла :(")
             }
         })
     });
-    // $inp.click(function () {
-    //
-    // })
 </script>
 </body>
 </html>

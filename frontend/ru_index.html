@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Портал кросс-языковой морфологии</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Social Buttons CSS -->
+    <link href="css/bootstrap-social.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+<div class="text-center" id="nav_bar">
+    <nav class="navbar nav-pills bg-dark">
+        <div class="col-7">
+            <h2 style="color: lightgray">Портал кросс-языковой морфологии</h2>
+        </div>
+        <div class="col-4">
+            <form class="form-inline float-right">
+                <button class="btn bg-light" type="button" id="aboutus" data-toggle="modal" data-target="#aboutmodal">О нас</button>
+                <button class="btn btn-social bg-light" type="button" id="github" data-toggle="modal" data-target="#githubmodal"><i class="fab fa-github"></i>Манускрипты</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='index.html'">Eng </button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="aboutmodal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">О нас</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="text-justify: distribute-all-lines">Привет от команды исследователей кросс-языковой морфологии!<br>  Мы - 3 (в прошлом 5) студента из НИУ ВШЭ, нас зовут Лоренцо Този, Владимир Власов и Анастасия Хорошева. <br> Мы разработали алгоритм, который производит леммы, тег части речи и морфосинтаксическую разметку для слов в заданном языке. Алгоритм опирается на размеченные данные на языках, родственных для заданного (например, как итальянский для сардинского). <br> Полное объяснение работы алгоритма можно прочитать в нашей <a href="https://www.aclweb.org/anthology/W19-1415.pdf"> статье</a>, написанной по итогам соревнования VarDial, прошедшего в 2019 году.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="githubmodal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Вы покидаете портал</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Вы уверены, что хотите покинуть портал?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='https://github.com/NIS-2018-CROSS-M/cross-lingual-morph-analysis'">К манускриптам!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Я случайно</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="breadcrumb">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item text-active" aria-current="page">Главный зал</li>
+        </ol>
+    </nav>
+</div>
+
+<div id="content" class="container-fluid" role="main">
+    <br>
+    <p class="text-center">Здравствуйте! Этот портал создает корпус с леммами, частеречной и морфо-синтаксической разметкой — все для Вас 🙌<br> Чтобы начать работу, Вам нужно сделать два несложных шага и иметь корпус текстов на необходимом языке.</p>
+    <br>
+    <p class="text-center">Сейчас наш портал умеет работать с языками из тюркской и романской семьи.</p>
+    <br>
+    <div class="col-12 text-center">
+        <button id="singlebutton" name="singlebutton" class="btn btn-danger big-button"
+                onclick="window.location.href='ru_s1_fam.html'">В следующий зал!
+        </button>
+    </div>
+</div>
+
+<footer class="card-footer">
+<div class="text-center">2019 || Высшая Школа Экономики - ФГН - школа лингвистики
+</div>
+</footer>
+
+<!-- Bootstrap, JQuery and Popper -->
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/480cf8c6f9.js" crossorigin="anonymous"></script>
+</body>
+</html>

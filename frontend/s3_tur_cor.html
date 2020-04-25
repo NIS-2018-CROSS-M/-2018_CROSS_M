@@ -26,6 +26,7 @@
             <form class="form-inline float-right">
                 <button class="btn bg-light" type="button" id="aboutus" data-toggle="modal" data-target="#aboutmodal">About Us</button>
                 <button class="btn btn-social bg-light" type="button" id="github" data-toggle="modal" data-target="#githubmodal"><i class="fab fa-github"></i>Repository</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='ru_s3_tur_cor.html'">Rus </button>
             </form>
         </div>
     </nav>
@@ -42,7 +43,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p style="text-justify: distribute-all-lines">Welcome from the cross-lingual-morph-analysis Team! We are 3 (previously 5) students from NRU-HSE, our names are Lorenzo Tosi, Vladimir Vlasov and Anastasia Khorosheva. <br> The algorithm we developed is able to produce lemma, part-of-speech tag and morphosyntactic annotations for words in a given language, based on annotated data of languages coming from the same family (e.g. Sardinian and Italian). <br> The full algorithm is explained in the paper we produced for the VarDial 2019 competition (https://www.aclweb.org/anthology/W19-1415.pdf).</p>
+        <p style="text-justify: distribute-all-lines">Welcome from the cross-lingual-morpho-analysis Team!<br>  We are 3 (previously 5) students from NRU-HSE, our names are Lorenzo Tosi, Vladimir Vlasov and Anastasia Khorosheva. <br> We developed the algorithm that produces lemma, part-of-speech tag and morphosyntactic annotations for words in a given language. It is based on annotated data of languages coming from the same family (e.g. Sardinian and Italian). <br> The full algorithm is explained in our <a href="https://www.aclweb.org/anthology/W19-1415.pdf"> paper</a> from the VarDial 2019 competition.</p>
       </div>
     </div>
   </div>
@@ -84,8 +85,8 @@
 
 <div id="content" class="container-fluid" role="main">
     <br>
-    <p class="text-center">Load your corpus file! The file should be a corpus of texts from your target language in .txt
-        format. The text doesn't need to be preformatted or preprocessed before loading.</p>
+    <p class="text-center">Load your corpus file! The file should be in .txt
+        format and contain the texts from your target language.<br> The texts don't need to be pre-processed before loading.</p>
     <br>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -150,7 +151,7 @@
                 window.location.href = 's4_end.html?result_fn='+result_fn.toString()
             },
             error: function (result) {
-                alert("Error! File not uploaded.")
+                alert("Error! File not uploaded :(")
             }
         })
     });
